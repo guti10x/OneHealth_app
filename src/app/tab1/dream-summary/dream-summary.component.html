@@ -1,0 +1,19 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <ion-icon name="moon" slot="start" style="color: #FFD700; font-size: 28px;"></ion-icon>
+      <span class="title">Dream Summary</span>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="sleep-info">
+      <p class="sleep-text">Hours of sleep: <strong>{{ hoursOfSleep }} hours</strong></p>
+      <ion-icon name="bed" style="font-size: 50px; color: #00796b;"></ion-icon>
+    </div>
+    <div class="additional-info">
+      <p><strong>Sleep Quality:</strong> {{ sleepQuality }}</p>
+      <p><strong>Time Slept:</strong> {{ timeSlept }}</p>
+    </div>
+  </ion-card-content>
+</ion-card>
