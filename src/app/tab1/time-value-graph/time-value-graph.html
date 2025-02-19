@@ -1,0 +1,19 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <ion-icon name="bar-chart" slot="start" style="color: #000000; font-size: 28px;"></ion-icon>
+      <span class="title">{{ graphTitle || 'Graph Summary' }}</span>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <div *ngIf="data && data.length > 0; else noData">
+      <canvas #chartCanvas></canvas>
+    </div>
+
+    <ng-template #noData>
+      <p>No data available for the graph.</p>
+    </ng-template>
+  </ion-card-content>
+</ion-card>
