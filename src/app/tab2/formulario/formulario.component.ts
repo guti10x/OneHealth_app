@@ -1,27 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PickerController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss'],
-  imports: [IonicModule, FormsModule]
+  imports: [IonicModule, FormsModule, CommonModule]
 })
+
 export class FormularioComponent implements OnInit {
-  // Variables para almacenar los datos del formulario
+  @Input() formType: string = ''; // Recibe el tipo de formulario (mañana o noche)
+
+  // Formulario 1: Solo horas y descanso
   wakeUpTime: string = '';
   sleepTime: string = '';
-  restLevel: number = 5;
+  restLevel: number = 5; // Grado de descanso
+
+  // Formulario 2: Datos emocionales y de energía
+  timestamp: string = ''; // Marca de tiempo
+  avgAnxietyLevel: number = 5;
+  maxAnxietyLevel: number = 5;
+  sadnessLevel: number = 5;
+  happinessLevel: number = 5;
+  apathyLevel: number = 5;
+  avgEnergyLevel: number = 5;
 
   constructor(private pickerCtrl: PickerController) {}
 
-  ngOnInit(): void {
-    // Aquí puedes poner cualquier lógica adicional de inicialización si es necesario.
-  }
+  ngOnInit(): void {}
 
-  // Función para abrir selector de horas y minutos
+  // Función para abrir el selector de horas y minutos
   async openTimePicker(field: string) {
     const picker = await this.pickerCtrl.create({
       columns: [
@@ -64,12 +75,18 @@ export class FormularioComponent implements OnInit {
     await picker.present();
   }
 
-  // Función para enviar datos del formulario al backend (por ejemplo)
   submitForm() {
     console.log('Formulario enviado con:', {
       wakeUpTime: this.wakeUpTime,
       sleepTime: this.sleepTime,
-      restLevel: this.restLevel
+      restLevel: this.restLevel,
+      timestamp: this.timestamp,
+      avgAnxietyLevel: this.avgAnxietyLevel,
+      maxAnxietyLevel: this.maxAnxietyLevel,
+      sadnessLevel: this.sadnessLevel,
+      happinessLevel: this.happinessLevel,
+      apathyLevel: this.apathyLevel,
+      avgEnergyLevel: this.avgEnergyLevel
     });
     alert('Formulario guardado correctamente.');
   }

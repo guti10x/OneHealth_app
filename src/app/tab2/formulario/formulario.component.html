@@ -1,32 +1,51 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Formulario de la Mañana</ion-card-title>
-  </ion-card-header>
+<!-- Formulario 1: Solo horas y descanso -->
+<div *ngIf="formType === 'formularioMañana'">
+  <ion-item button (click)="openTimePicker('wakeUpTime')">
+    <ion-label>Hora de despertarse:</ion-label>
+    <ion-text>{{ wakeUpTime || 'Seleccionar hora' }}</ion-text>
+  </ion-item>
 
-  <ion-card-content>
-    <form (ngSubmit)="submitForm()">
-      <!-- Hora de despertarse -->
-      <ion-item button (click)="openTimePicker('wakeUpTime')">
-        <ion-label>Hora de despertarse:</ion-label>
-        <ion-text>{{ wakeUpTime || 'Seleccionar hora' }}</ion-text>
-      </ion-item>
+  <ion-item button (click)="openTimePicker('sleepTime')">
+    <ion-label>Hora de acostarse:</ion-label>
+    <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
+  </ion-item>
 
-      <!-- Hora de acostarse -->
-      <ion-item button (click)="openTimePicker('sleepTime')">
-        <ion-label>Hora de acostarse:</ion-label>
-        <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
-      </ion-item>
+  <ion-item>
+    <ion-label>Grado de descanso</ion-label>
+    <ion-range [(ngModel)]="restLevel" name="restLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+</div>
 
-      <!-- Nivel de descanso -->
-      <ion-item>
-        <ion-label position="stacked">Nivel de descanso:</ion-label>
-        <ion-range min="1" max="10" [(ngModel)]="restLevel" name="restLevel">
-          <ion-label slot="start">1</ion-label>
-          <ion-label slot="end">10</ion-label>
-        </ion-range>
-      </ion-item>
+<!-- Formulario 2: Datos emocionales y de energía -->
+<div *ngIf="formType === 'formularioNoche'">
 
-      <ion-button expand="full" type="submit">Guardar</ion-button>
-    </form>
-  </ion-card-content>
-</ion-card>
+  <ion-item>
+    <ion-label>Nivel medio de ansiedad</ion-label>
+    <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nivel máximo de ansiedad</ion-label>
+    <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Grado de tristeza</ion-label>
+    <ion-range [(ngModel)]="sadnessLevel" name="sadnessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Grado de alegría</ion-label>
+    <ion-range [(ngModel)]="happinessLevel" name="happinessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Grado de desgana</ion-label>
+    <ion-range [(ngModel)]="apathyLevel" name="apathyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nivel medio de energía</ion-label>
+    <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+  </ion-item>
+</div>
