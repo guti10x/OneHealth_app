@@ -1,0 +1,32 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Formulario de la Mañana</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form (ngSubmit)="submitForm()">
+      <!-- Hora de despertarse -->
+      <ion-item button (click)="openTimePicker('wakeUpTime')">
+        <ion-label>Hora de despertarse:</ion-label>
+        <ion-text>{{ wakeUpTime || 'Seleccionar hora' }}</ion-text>
+      </ion-item>
+
+      <!-- Hora de acostarse -->
+      <ion-item button (click)="openTimePicker('sleepTime')">
+        <ion-label>Hora de acostarse:</ion-label>
+        <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
+      </ion-item>
+
+      <!-- Nivel de descanso -->
+      <ion-item>
+        <ion-label position="stacked">Nivel de descanso:</ion-label>
+        <ion-range min="1" max="10" [(ngModel)]="restLevel" name="restLevel">
+          <ion-label slot="start">1</ion-label>
+          <ion-label slot="end">10</ion-label>
+        </ion-range>
+      </ion-item>
+
+      <ion-button expand="full" type="submit">Guardar</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
