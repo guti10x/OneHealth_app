@@ -1,42 +1,47 @@
-/* Estilos generales */
-:host {
-    display: block;
-    padding: 16px;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    border-radius: 10px;
+/* Contenedor general del formulario */
+.form-container {
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
 }
 
-/* Contenedor del formulario */
+/* Elementos individuales */
 ion-item {
-    --background: #ffffff;
-    --border-radius: 8px;
+    --background: transparent;
+    border-radius: 8px;
     margin-bottom: 12px;
-    padding: 10px;
+    padding: 12px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Etiquetas */
 ion-label {
-    font-size: 12px;
-    min-width: 70px;
+    font-size: 14px;
     font-weight: 500;
-    font-size: 10px;
     color: #333;
 }
 
 /* Selector de hora */
 ion-text {
-    font-size: 13px;
-    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
 }
 
 /* Sliders */
 ion-range {
-    --bar-background: #ddd;
+    --bar-background: #e0e0e0;
     --bar-background-active: #007bff;
     --knob-background: #007bff;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 /* Valor del slider */
@@ -55,4 +60,20 @@ ion-range {
     font-size: 12px;
     color: #666;
     padding: 0 8px;
+}
+
+/* Animación sutil en la carga del formulario */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeIn 0.8s ease-in-out;
 }
