@@ -11,6 +11,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { DreamSummaryComponent } from './dream-summary/dream-summary.component';
 import { TimeValueGraphComponent } from './time-value-graph/time-value-graph';
+import { MobileUsageStatsComponent } from "./mobile-usage-stats/mobile-usage-stats.component";
 
 
 @NgModule({
@@ -21,8 +22,9 @@ import { TimeValueGraphComponent } from './time-value-graph/time-value-graph';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     DreamSummaryComponent,
-    TimeValueGraphComponent
-  ],
+    TimeValueGraphComponent,
+    MobileUsageStatsComponent
+],
   declarations: [
     Tab1Page
   ]

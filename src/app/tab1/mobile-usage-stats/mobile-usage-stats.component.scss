@@ -1,0 +1,89 @@
+/* Estilos generales */
+.stats-card {
+    max-width: 320px;
+    margin: auto;
+    padding: 16px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Títulos */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Sección de tiempo total */
+.time-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eef3f7;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.time-icon {
+    font-size: 18px;
+    margin-right: 6px;
+    color: #3498db;
+}
+
+/* Cambio en el uso */
+.usage-change {
+    font-size: 0.85rem;
+    margin-top: 5px;
+    color: #27ae60;
+}
+
+/* Top 3 Apps Más Usadas */
+.apps-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.app-container {
+    flex: 1;
+    margin: 4px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #eef3f7;
+    text-align: center;
+}
+
+.app-icon {
+    font-size: 20px;
+    color: #3498db;
+}
+
+.app-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.app-time {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Información de desbloqueos */
+.unlock-container {
+    margin-top: 12px;
+    background: #eef3f7;
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
