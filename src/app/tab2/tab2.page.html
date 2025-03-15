@@ -6,11 +6,7 @@
 
 <ion-content [fullscreen]="true">
 
-<!-- Formulario para la mañana -->
-<app-formulario [formType]="'formularioMañana'"></app-formulario>
-
-<!-- Formulario para la noche -->
-<app-formulario [formType]="'formularioNoche'"></app-formulario>
-
+  <!-- Formulario formularioNoche | formularioMañana -->
+  <app-formulario [formType]="formularioType"></app-formulario>
 
 </ion-content>

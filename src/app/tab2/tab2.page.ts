@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
 })
 
 export class Tab2Page {
+  formularioType: string = 'formulario'; // formularioNoche | formularioMañana
+
+  ngOnInit() {
+    // DEFINIR TIPO DE FORMULARIO
+    this.formularioType = 'formularioMañana';
+  }
 
 }
