@@ -6,6 +6,7 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { FormularioComponent } from './formulario/formulario.component';
+import { HeaderBuenosDiasNochesComponent } from './header-buenos-dias-noches/header-buenos-dias-noches.component';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
@@ -16,7 +17,8 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    FormularioComponent
+    FormularioComponent,
+    HeaderBuenosDiasNochesComponent
   ],
   declarations: [Tab2Page]
 })

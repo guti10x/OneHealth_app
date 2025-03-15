@@ -1,0 +1,12 @@
+<div class="greeting-container animate-fade-in">
+  <div class="greeting-content">
+    <ion-icon *ngIf="isMorning; else nightIcon" name="sunny" class="icon morning animate-pulse"></ion-icon>
+    <ng-template #nightIcon>
+      <ion-icon name="moon" class="icon night animate-pulse"></ion-icon>
+    </ng-template>
+    <h1 *ngIf="isMorning; else goodNight" class="greeting-text">¡Buenos días!</h1>
+    <ng-template #goodNight>
+      <h1 class="greeting-text">¡Buenas noches!</h1>
+    </ng-template>
+  </div>
+</div>

@@ -12,7 +12,8 @@ export class Tab2Page {
   // Tipo formulario
   formularioType: string = 'formulario'; // formularioNoche | formularioMañana
   // Variable para saber si es de día o noche para mostrar header de Buenos días / noches
-  isMorning: boolean | undefined;
+  isMorning: boolean = true;
+
 
   ngOnInit() {
     this.setFormTypeTime();
