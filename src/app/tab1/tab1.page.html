@@ -13,10 +13,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <!--<app-explore-container name="Tab 1 page"></app-explore-container>-->
+  <!-- Datos de sueño -->
   <app-dream-summary></app-dream-summary>
+
+  <!-- Avisos -->
+  <app-carousel-dash [tipoCarrusel]="'Avisos'"></app-carousel-dash> <!-- Mostrar avisos de datos anormales que se detectan -->
+  <!-- Recomendaciones -->
+  <app-carousel-dash [tipoCarrusel]="'Recomendaciones'"></app-carousel-dash> <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
+
+  <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats></app-mobile-usage-stats>
+
+  <!-- Nivel de ansiedad -->
   <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
+  <!-- Nivel de estrés -->
   <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
 
 </ion-content>

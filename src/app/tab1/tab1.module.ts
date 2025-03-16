@@ -12,7 +12,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { DreamSummaryComponent } from './dream-summary/dream-summary.component';
 import { TimeValueGraphComponent } from './time-value-graph/time-value-graph';
 import { MobileUsageStatsComponent } from "./mobile-usage-stats/mobile-usage-stats.component";
-
+import { CarouselDashComponent } from './carousel-dash/carousel-dash.component';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { MobileUsageStatsComponent } from "./mobile-usage-stats/mobile-usage-sta
     Tab1PageRoutingModule,
     DreamSummaryComponent,
     TimeValueGraphComponent,
-    MobileUsageStatsComponent
+    MobileUsageStatsComponent,
+    CarouselDashComponent
 ],
   declarations: [
     Tab1Page
