@@ -1,35 +1,45 @@
 /* Estilos generales */
 .stats-card {
-    max-width: 320px;
+    max-width: 350px;
     margin: auto;
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-family: 'Arial', sans-serif;
 }
 
+/* Estilo para cada bloque */
+.stat-box {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /* Títulos */
-.card-title {
+.section-title {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
 }
 
-/* Sección de tiempo total */
+/* Contenedor de tiempo total del día */
 .time-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     background: #eef3f7;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     color: #2c3e50;
-    margin-bottom: 10px;
+    max-width: 200px;
+    margin: auto;
 }
 
 .time-icon {
@@ -42,7 +52,19 @@
 .usage-change {
     font-size: 0.85rem;
     margin-top: 5px;
+    font-weight: bold;
+}
+
+.positive {
     color: #27ae60;
+}
+
+.negative {
+    color: #e74c3c;
+}
+
+.neutral {
+    color: #7f8c8d;
 }
 
 /* Top 3 Apps Más Usadas */
@@ -77,13 +99,30 @@
     color: #666;
 }
 
-/* Información de desbloqueos */
+/* Número de desbloqueos */
 .unlock-container {
-    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #eef3f7;
-    padding: 6px;
+    padding: 8px 12px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     color: #2c3e50;
+    max-width: 180px; /* Ajusta el ancho para que no sea muy grande */
+    margin: auto;
+}
+
+.unlock-icon {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 6px;
+    color: #3498db;
+}
+
+.unlock-value {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
 }

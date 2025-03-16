@@ -1,28 +1,27 @@
-<ion-card class="stats-card animate-fade-in">
++<ion-card class="stats-card animate-fade-in">
   <ion-card-header>
     <ion-card-title class="card-title">Estadísticas de Uso</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
     <!-- Parte superior: Tiempo total del día -->
-    <div class="top-section">
+    <div class="stat-box">
       <h2 class="section-title">Tiempo Total del Día</h2>
       <div class="time-info">
         <div class="time-container">
           <ion-icon name="timer" class="time-icon"></ion-icon>
           <p class="time-value">{{ totalUsageTime }}</p>
         </div>
-
         <div class="change-info">
-          <p *ngIf="usageChange > 0" class="usage-change positive">+{{ usageChange }} minutos</p>
-          <p *ngIf="usageChange < 0" class="usage-change negative">{{ usageChange }} minutos</p>
+          <p *ngIf="usageChange > 0" class="usage-change positive">+{{ usageChange }} minutos respecto ayer</p>
+          <p *ngIf="usageChange < 0" class="usage-change negative">{{ usageChange }} minutos respecto ayer</p>
           <p *ngIf="usageChange === 0" class="usage-change neutral">Sin cambios</p>
         </div>
       </div>
     </div>
 
     <!-- Parte inferior: Top 3 apps más usadas -->
-    <div class="bottom-section">
+    <div class="stat-box">
       <h3 class="section-title">Top 3 Apps Más Usadas</h3>
       <div class="apps-row">
         <div *ngFor="let app of topApps" class="app-container">
@@ -33,15 +32,15 @@
           </div>
         </div>
       </div>
-
-      <!-- Número de desbloqueos -->
-      <div class="unlock-info">
-        <h3 class="section-title">Número de Desbloqueos</h3>
-        <div class="unlock-container">
-          <ion-icon name="unlock" class="unlock-icon"></ion-icon>
-          <p class="unlock-value">{{ unlockCount }} veces</p>
-        </div>
-      </div>
     </div>
+
+    <!-- Número de desbloqueos -->
+    <div class="stat-box">
+      <h3 class="section-title">Número de Desbloqueos</h3>
+      <div class="unlock-container">
+        <ion-icon name="lock-open-outline" class="unlock-icon"></ion-icon>
+        <p class="unlock-value">{{ unlockCount }} veces</p>
+      </div>
+    </div>    
   </ion-card-content>
 </ion-card>
