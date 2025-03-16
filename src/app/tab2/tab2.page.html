@@ -6,9 +6,14 @@
 
 <ion-content [fullscreen]="true">
   
-  <app-header-buenos-dias-noches [isMorning]="isMorning"></app-header-buenos-dias-noches>
+  <app-header-buenos-dias-noches [isMorning]="formularioType"></app-header-buenos-dias-noches>
 
   <!-- Formulario -->
-  <app-formulario [formType]="formularioType"></app-formulario>
+  <ng-container *ngIf="!formularioCompleto; else showCompletedMessage">
+    <app-formulario [formType]="formularioType"></app-formulario>
+  </ng-container>
+  <ng-template #showCompletedMessage>
+    <p class="completed-message">Ya se ha rellenado el formulario.</p>
+  </ng-template>
   
 </ion-content>

@@ -12,7 +12,7 @@ export class HeaderBuenosDiasNochesComponent  implements OnInit {
 
   constructor() { }
 
-  @Input() isMorning: boolean = true;
+  @Input() isMorning: string = "k";
 
   ngOnInit() {}
 
