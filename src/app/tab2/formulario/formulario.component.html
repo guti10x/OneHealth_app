@@ -6,7 +6,7 @@
     </ion-item>
 
     <ion-item button (click)="openTimePicker('sleepTime')">
-      <ion-label>Hora  a la que te has acostado:</ion-label>
+      <ion-label>Hora a la que te has acostado:</ion-label>
       <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
@@ -54,4 +54,8 @@
       <p class="value-display">{{ avgEnergyLevel }}</p>
     </ion-item>
   </div>
+
+  <ion-button expand="full" class="submit-btn" (click)="submitForm()">
+    Enviar
+  </ion-button>
 </div>

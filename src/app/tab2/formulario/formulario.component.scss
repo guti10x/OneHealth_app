@@ -78,3 +78,17 @@ ion-range {
 .form-container {
     animation: fadeIn 0.8s ease-in-out;
 }
+
+/* Botón de envío */
+.submit-btn {
+    margin-top: 15px;
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
