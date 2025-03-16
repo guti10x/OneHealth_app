@@ -1,30 +1,23 @@
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    margin: 20px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    
-    &:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-    }
-  
-    &:active {
-      transform: scale(0.95);
-    }
-  
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  }
+.completed-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2ecc71; /* Color verde para indicar éxito */
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #eaf7e2; /* Fondo suave verde */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.completed-message::before {
+  content: '✔'; /* Ícono de check */
+  font-size: 1.2rem;
+  color: #27ae60; /* Verde oscuro */
+  margin-right: 8px;
+}
+
   
