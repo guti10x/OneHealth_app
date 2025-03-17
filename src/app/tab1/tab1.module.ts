@@ -13,6 +13,7 @@ import { DreamSummaryComponent } from './dream-summary/dream-summary.component';
 import { TimeValueGraphComponent } from './time-value-graph/time-value-graph';
 import { MobileUsageStatsComponent } from "./mobile-usage-stats/mobile-usage-stats.component";
 import { CarouselDashComponent } from './carousel-dash/carousel-dash.component';
+import { BiometricDataSumaryComponent } from './biometric-data-sumary/biometric-data-sumary.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { CarouselDashComponent } from './carousel-dash/carousel-dash.component';
     DreamSummaryComponent,
     TimeValueGraphComponent,
     MobileUsageStatsComponent,
-    CarouselDashComponent
+    CarouselDashComponent,
+    BiometricDataSumaryComponent
 ],
   declarations: [
     Tab1Page
