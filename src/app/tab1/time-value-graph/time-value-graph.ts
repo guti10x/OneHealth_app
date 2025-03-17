@@ -15,8 +15,8 @@ export class TimeValueGraphComponent implements OnInit, AfterViewInit {
   @Input() graphTitle: string = 'Graph';
   @ViewChild('chartCanvas', { static: false }) chartCanvas!: ElementRef;
 
-  data: number[] = [12, 19, 3, 5, 2, 3];
-  labels: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+  data: number[] = [0, 20, 30, 50, 60, 70, 100];
+  labels: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
   chart: any;
 
   constructor() {
@@ -31,23 +31,24 @@ export class TimeValueGraphComponent implements OnInit, AfterViewInit {
 
   createChart() {
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
-
+    const styles = getComputedStyle(document.documentElement);
+  
     if (this.chart) {
       this.chart.destroy(); // Destruir gráfico anterior si existe
     }
-
+  
     this.chart = new Chart(ctx, {
-      type: 'line',
       data: {
         labels: this.labels,
         datasets: [{
-          label: 'Monthly Data',
+          type: 'line',
+          label: '', // Eliminamos el texto de la leyenda
           data: this.data,
-          borderColor: '#red',
-          backgroundColor: 'rgba(22, 8, 58, 0.2)',
+          borderColor: styles.getPropertyValue('--chart-border-color').trim(),
+          backgroundColor: styles.getPropertyValue('--chart-bg-color').trim(),
           borderWidth: 2,
-          pointBackgroundColor: 'red',
-          pointBorderColor: '#black',
+          pointBackgroundColor: styles.getPropertyValue('--chart-point-bg-color').trim(),
+          pointBorderColor: styles.getPropertyValue('--chart-point-border-color').trim(),
           pointRadius: 5,
           tension: 0.4
         }]
@@ -57,26 +58,23 @@ export class TimeValueGraphComponent implements OnInit, AfterViewInit {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
-            labels: {
-              color: 'black'
-            }
+            display: false // Eliminamos la leyenda completamente
           }
         },
         scales: {
           x: {
             ticks: {
-              color: 'black'
+              color: styles.getPropertyValue('--chart-tick-color').trim()
             }
           },
           y: {
             beginAtZero: true,
             ticks: {
-              color: 'black'
+              color: styles.getPropertyValue('--chart-tick-color').trim()
             }
           }
         }
       }
     });
-  }
+  } 
 }
