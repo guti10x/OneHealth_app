@@ -1,19 +1,33 @@
-<ion-card>
+<ion-card class="sleep-card">
+  <!-- Encabezado -->
   <ion-card-header>
     <ion-card-title>
-      <ion-icon name="moon" slot="start" style="color: #FFD700; font-size: 28px;"></ion-icon>
+      <ion-icon name="moon" class="icon-moon"></ion-icon>
       <span class="title">Dream Summary</span>
     </ion-card-title>
   </ion-card-header>
 
+  <!-- Contenido -->
   <ion-card-content>
+    <!-- Información principal -->
     <div class="sleep-info">
-      <p class="sleep-text">Hours of sleep: <strong>{{ hoursOfSleep }} hours</strong></p>
-      <ion-icon name="bed" style="font-size: 50px; color: #00796b;"></ion-icon>
+      <p class="sleep-text">
+        <span>Hours of sleep:</span> <strong>{{ hoursOfSleep }} hours</strong>
+      </p>
+      <ion-icon name="bed" class="icon-bed"></ion-icon>
     </div>
+
+    <p class="time_sleep_text"><strong>Time Slept:</strong> {{ timeSlept }}</p>
+
+    <!-- Información adicional con calidad del sueño visual -->
     <div class="additional-info">
-      <p><strong>Sleep Quality:</strong> {{ sleepQuality }}</p>
-      <p><strong>Time Slept:</strong> {{ timeSlept }}</p>
+      <p><strong>Sleep Quality:</strong></p>
+      <div [ngClass]="getSleepQualityClass(sleepQuality)" class="quality-badge">
+        <ion-icon [name]="getSleepQualityIcon(sleepQuality)"></ion-icon>
+        <span>{{ sleepQuality }}</span>
+      </div>
     </div>
+
+    
   </ion-card-content>
 </ion-card>
