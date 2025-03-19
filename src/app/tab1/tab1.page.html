@@ -1,15 +1,10 @@
-<ion-header [translucent]="true">
-  <div class="header-image-container">
-    <img src="../../assets/plataforma_one_health_cover.jfif" alt="Header Image" class="header-image">
-  </div>
-</ion-header>
-
 <ion-content [fullscreen]="true">
+  <div class="spacer_header"></div>
 
   <!-- Avisos / Recomendacciones -->
   <!-- Mostrar avisos de datos anormales que se detectan -->  <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
   <app-carousel-dash></app-carousel-dash>
-
+  
   <!-- Datos de sueño -->
   <app-dream-summary></app-dream-summary>
 
@@ -17,8 +12,7 @@
   <app-mobile-usage-stats></app-mobile-usage-stats>
 
   <!-- Gráficas de ansiedad y estrés -->
-  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)"
->
+  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
     <!-- Flecha de retroceso usando Ion Icon -->
     <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
 
