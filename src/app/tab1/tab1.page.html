@@ -24,10 +24,18 @@
   <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats></app-mobile-usage-stats>
 
-  <!-- Nivel de ansiedad -->
-  <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
-  <!-- Nivel de estrés -->
-  <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
+  <div class="carousel-container">
+    <button (click)="cambiarGrafica(-1)">⬅️</button>
+  
+    <!-- Nivel de ansiedad -->
+    <app-time-value-graph *ngIf="graficaActual === 0" [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
+    <!-- Nivel de estrés -->
+    <app-time-value-graph *ngIf="graficaActual === 1" [graphTitle]="'Stress Statistics'"></app-time-value-graph>
+  
+    <button (click)="cambiarGrafica(1)">➡️</button>
+  </div>
+
+  
 
   <!-- Datos Biométricos -->
   <app-biometric-data-sumary></app-biometric-data-sumary>
