@@ -1,13 +1,10 @@
 .carousel-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  button {
+    touch-action: pan-y; // Permitir scroll vertical 
+}
+
+button {
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
-  }
-  
+}
