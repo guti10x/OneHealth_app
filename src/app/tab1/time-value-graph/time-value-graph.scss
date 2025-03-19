@@ -13,7 +13,6 @@
 
 /* ====== Encabezado de la tarjeta ====== */
 .graph-card-header {
-
     color: white;
     border-radius: 10px 10px 0 0;
     padding: 14px;
@@ -28,6 +27,10 @@
     justify-content: center;
     font-size: 1.2rem;
     font-weight: bold;
+
+    span {
+        margin-left: 6px;
+    }
 }
 
 /* Icono del gráfico */
@@ -67,12 +70,11 @@
     --chart-point-bg-color: red;
     --chart-point-border-color: black;
     --chart-tick-color: black;
-  }
-  
-  .graph-canvas {
+}
+
+.graph-canvas {
     width: 100% !important;
     height: 300px !important;
     background-color: #ffffff;
     border-radius: 10px;
-  }
-  
+}

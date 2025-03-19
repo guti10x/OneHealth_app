@@ -16,6 +16,7 @@ export class DreamSummaryComponent  implements OnInit {
   hoursOfSleep: number = 0;
   sleepQuality: string = '';
   timeSlept: string = '';
+  time_sleep_diff: number = 19;
 
   ngOnInit() {
     this.loadSleepData();

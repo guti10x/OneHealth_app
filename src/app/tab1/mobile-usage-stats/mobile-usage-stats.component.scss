@@ -20,6 +20,18 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Título del card */
+ion-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    span{
+        margin-left: 8px;
+    }
+}
+
 /* Títulos */
 .section-title {
     font-size: 1.2rem;
@@ -49,7 +61,7 @@
     color: #3498db;
 }
 
-/* Cambio en el uso */
+/* Cambio de colores de la diferencia de tiempo */
 .usage-change {
     font-size: 0.85rem;
     margin-top: 5px;

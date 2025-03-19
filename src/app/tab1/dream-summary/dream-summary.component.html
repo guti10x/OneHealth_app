@@ -3,31 +3,35 @@
   <ion-card-header>
     <ion-card-title>
       <ion-icon name="moon" class="icon-moon"></ion-icon>
-      <span class="title">Dream Summary</span>
+      <span class="ion-card-title">Sueño</span>
     </ion-card-title>
   </ion-card-header>
 
   <!-- Contenido -->
   <ion-card-content>
     <!-- Información principal -->
-    <div class="sleep-info">
-      <p class="sleep-text">
-        <span>Hours of sleep:</span> <strong>{{ hoursOfSleep }} hours</strong>
-      </p>
-      <ion-icon name="bed" class="icon-bed"></ion-icon>
-    </div>
+    <div class="stat-box">
 
-    <p class="time_sleep_text"><strong>Time Slept:</strong> {{ timeSlept }}</p>
+      <div class="sleep-info">
+        <p class="sleep-text">
+          <span>Horas de sueño:</span> <strong>{{ hoursOfSleep }} horas</strong>
+        </p>
+        <ion-icon name="bed" class="icon-bed"></ion-icon>
+      </div>
 
-    <!-- Información adicional con calidad del sueño visual -->
-    <div class="additional-info">
-      <p><strong>Sleep Quality:</strong></p>
-      <div [ngClass]="getSleepQualityClass(sleepQuality)" class="quality-badge">
-        <ion-icon [name]="getSleepQualityIcon(sleepQuality)"></ion-icon>
-        <span>{{ sleepQuality }}</span>
+      <p *ngIf="time_sleep_diff > 0" class="usage-change positive">+{{ time_sleep_diff }} minutos respecto ayer</p>
+      <p *ngIf="time_sleep_diff < 0" class="usage-change negative">{{ time_sleep_diff }} minutos respecto ayer</p>
+      <p *ngIf="time_sleep_diff === 0" class="usage-change neutral">Igual que ayer</p>
+
+      <!-- Información adicional con calidad del sueño visual -->
+      <div class="additional-info">
+        <p><strong>Calidad del sueño:</strong></p>
+        <div [ngClass]="getSleepQualityClass(sleepQuality)" class="quality-badge">
+          <ion-icon [name]="getSleepQualityIcon(sleepQuality)"></ion-icon>
+          <span>{{ sleepQuality }}</span>
+        </div>
       </div>
     </div>
 
-    
   </ion-card-content>
 </ion-card>
