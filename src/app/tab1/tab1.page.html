@@ -24,10 +24,25 @@
   <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats></app-mobile-usage-stats>
 
-  <div class="carousel-container"  (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
-    <app-time-value-graph *ngIf="graficaActual === 0" [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
-    <app-time-value-graph *ngIf="graficaActual === 1" [graphTitle]="'Stress Statistics'"></app-time-value-graph>
+  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)"
+>
+  <!-- Flecha de retroceso usando Ion Icon -->
+  <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
+
+  <!-- Contenedor deslizante de las gráficas -->
+  <div class="carousel-content" [style.transform]="'translateX(-' + (graficaActual * 100) + '%)'">
+    <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
+    <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
   </div>
+
+  <!-- Flecha de avance usando Ion Icon -->
+  <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
+</div>
+
+<!-- Indicadores -->
+<div class="indicators">
+  <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
+</div>
 
   <!-- Datos Biométricos -->
   <app-biometric-data-sumary></app-biometric-data-sumary>

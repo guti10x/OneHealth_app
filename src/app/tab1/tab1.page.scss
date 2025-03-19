@@ -1,10 +1,57 @@
 .carousel-container {
-    touch-action: pan-y; // Permitir scroll vertical 
-}
-
-button {
-    background: none;
-    border: none;
-    font-size: 24px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    touch-action: pan-y;
+  }
+  
+  .carousel-content {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-content app-time-value-graph {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 6px;
     cursor: pointer;
-}
+    z-index: 1;
+  }
+  
+  .carousel-btn.left {
+    left: 5px;
+  }
+  
+  .carousel-btn.right {
+    right: 5px;
+  }
+  
+  .indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .indicators span {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: rgb(47, 45, 45);
+    border-radius: 50%;
+    transition: background 0.3s;
+  }
+  
+  .indicators .active {
+    background:  #3498db;
+  }
+  

@@ -29,16 +29,19 @@ export class Tab1Page {
     const diffX = this.touchEndX - this.touchStartX;
 
     if (diffX > 50) {
-      // Swipe a la derecha (ir a la gráfica anterior)
-      this.cambiarGrafica(-1);
+      this.prevSlide(); // Swipe a la derecha (ir a la anterior)
     } else if (diffX < -50) {
-      // Swipe a la izquierda (ir a la siguiente gráfica)
-      this.cambiarGrafica(1);
+      this.nextSlide(); // Swipe a la izquierda (ir a la siguiente)
     }
   }
 
-  cambiarGrafica(direccion: number) {
-    this.graficaActual = (this.graficaActual + direccion + 2) % 2;
+  // Función para ir a la gráfica anterior
+  prevSlide() {
+    this.graficaActual = (this.graficaActual - 1 + 2) % 2;
   }
 
+  // Función para ir a la gráfica siguiente
+  nextSlide() {
+    this.graficaActual = (this.graficaActual + 1) % 2;
+  }
 }
