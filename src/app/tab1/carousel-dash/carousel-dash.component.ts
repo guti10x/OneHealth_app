@@ -10,12 +10,10 @@ import { IonicModule } from '@ionic/angular';
 export class CarouselDashComponent  implements OnInit {
 
     items = [
-    { title: '🔔 Notificación', content: 'Tienes una nueva alerta importante.' },
-    { title: '📊 Predicción', content: 'Se espera un aumento del uso en un 15% esta semana.' },
-    { title: '💡 Recomendación', content: 'Prueba reducir el tiempo en redes sociales antes de dormir.' }
-  ];
+      { title: '📊 Anomalías detectadas', content: 'Se espera un aumento del uso en un 15% esta semana.'},
+      { title: '💡 Recomendación del día', content: 'Prueba reducir el tiempo en redes sociales antes de dormir.'}
+    ];
 
-  @Input() tipoCarrusel!: string;
 
   // Índice del slide actual del carrusel
   currentIndex = 0;

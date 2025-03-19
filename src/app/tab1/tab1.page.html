@@ -1,48 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      My Data
-    </ion-title>
+    <ion-title> Mis datos </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">My data</ion-title>
+      <ion-title size="large">Mis datos</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Avisos / Recomendacciones -->
+  <!-- Mostrar avisos de datos anormales que se detectan -->  <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
+  <app-carousel-dash></app-carousel-dash>
 
   <!-- Datos de sueño -->
   <app-dream-summary></app-dream-summary>
 
-  <!-- Avisos -->
-  <app-carousel-dash [tipoCarrusel]="'Avisos'"></app-carousel-dash> <!-- Mostrar avisos de datos anormales que se detectan -->
-  <!-- Recomendaciones -->
-  <app-carousel-dash [tipoCarrusel]="'Recomendaciones'"></app-carousel-dash> <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
-
   <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats></app-mobile-usage-stats>
 
+  <!-- Gráficas de ansiedad y estrés -->
   <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)"
 >
-  <!-- Flecha de retroceso usando Ion Icon -->
-  <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
+    <!-- Flecha de retroceso usando Ion Icon -->
+    <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
 
-  <!-- Contenedor deslizante de las gráficas -->
-  <div class="carousel-content" [style.transform]="'translateX(-' + (graficaActual * 100) + '%)'">
-    <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
-    <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
+    <!-- Contenedor deslizante de las gráficas -->
+    <div class="carousel-content" [style.transform]="'translateX(-' + (graficaActual * 100) + '%)'">
+      <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
+      <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
+    </div>
+
+    <!-- Flecha de avance usando Ion Icon -->
+    <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
   </div>
-
-  <!-- Flecha de avance usando Ion Icon -->
-  <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
-</div>
-
-<!-- Indicadores -->
-<div class="indicators">
-  <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
-</div>
+  <!-- Indicadores carrusel de gráficas -->
+  <div class="indicators">
+    <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
+  </div>
 
   <!-- Datos Biométricos -->
   <app-biometric-data-sumary></app-biometric-data-sumary>
