@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdServiceService } from 'src/services/id-service.service';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -8,7 +8,7 @@ import { IdServiceService } from 'src/services/id-service.service';
 })
 export class Tab1Page {
 
-  constructor(private idService: IdServiceService) {}
+  constructor() {}
 
   graficaActual = 0;
   touchStartX = 0;
@@ -43,6 +43,6 @@ export class Tab1Page {
   // Función para ir a la gráfica siguiente
   nextSlide() {
     this.graficaActual = (this.graficaActual + 1) % 2;
-    this.idService.saveIdToDatabase();
   }
+
 }

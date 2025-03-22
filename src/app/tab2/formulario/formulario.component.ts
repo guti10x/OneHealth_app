@@ -4,6 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+// Importamos el servicio de Firebase
+import { FirebaseService } from 'src/services/firebase.service';
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -28,7 +31,7 @@ export class FormularioComponent implements OnInit {
   apathyLevel: number = 5;
   avgEnergyLevel: number = 5;
 
-  constructor(private pickerCtrl: PickerController) {}
+  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {}
 
@@ -75,7 +78,7 @@ export class FormularioComponent implements OnInit {
     await picker.present();
   }
 
-  submitForm() {
+  /*submitForm() {
     console.log('Formulario enviado con:', {
       wakeUpTime: this.wakeUpTime,
       sleepTime: this.sleepTime,
@@ -89,5 +92,29 @@ export class FormularioComponent implements OnInit {
       avgEnergyLevel: this.avgEnergyLevel
     });
     alert('Formulario guardado correctamente.');
+  }*/
+
+  submitFormMorning() {
+    const datosFormulario = {
+      id_mor_form: this.generateUniqueId(),
+      id_user: "testtttt2994e505-c82e-407f-97a0-86399687f652", // HAY que ver como obtengo el id del usuario
+      recorded_at: new Date(),
+      rest_level: this.restLevel,
+      sleep_time: this.sleepTime,  // HAY que ver como gestionar dia y hora
+      wake_up_time: this.wakeUpTime,  // HAY que ver como gestionar dia y hora
+    };
+
+    console.log('Datos del formulario:', datosFormulario);
+  
+    this.firebaseService.guardarFormulario(datosFormulario)
+      .then(() => {
+        console.log("Datos guardados con éxito:", datosFormulario);
+      })
+      .catch(error => console.error("Error al guardar", error));
+  }
+
+  // Función para generar un ID del formulario
+  private generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }
