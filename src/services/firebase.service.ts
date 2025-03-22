@@ -16,15 +16,35 @@ export class FirebaseService {
   }
 
   // ------------- GETS ------------- // 
-  // Predicciones
+  // Predicciones / Alertas
+  obtenerPredicciones(): Promise<any> {
+    const collectionRef = collection(this.firestore, 'predictions');
+    return getDocs(collectionRef).then(snapshot => {
+      return snapshot.docs.map(doc => doc.data());
+    });
+  }
+  // Datos de sueño
+  obtenerDatosSueño(): Promise<any> {
+    const collectionRef = collection(this.firestore, 'sleep_data');
+    return getDocs(collectionRef).then(snapshot => {
+      return snapshot.docs.map(doc => doc.data());
+    });
+  }
 
-  // Sueño
-
-  // Apps mas usadas
-
-  // Ansiedad
-
-  // Depresión
+  // Datos de uso del móvil
+  obtenerDatosApps(): Promise<any> {
+    const collectionRef = collection(this.firestore, 'mobile_data');
+    return getDocs(collectionRef).then(snapshot => {
+      return snapshot.docs.map(doc => doc.data());
+    });
+  }
+  // Datos biométricos
+  obtenerDatosBiometricos(): Promise<any> {
+    const collectionRef = collection(this.firestore, 'biometric_data');
+    return getDocs(collectionRef).then(snapshot => {
+      return snapshot.docs.map(doc => doc.data());
+    });
+  }
 
 
 }
