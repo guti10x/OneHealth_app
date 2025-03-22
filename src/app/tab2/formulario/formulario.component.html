@@ -4,13 +4,13 @@
 
   <div *ngIf="formType === 'formularioMañana'">
     <ion-item button (click)="openTimePicker('wakeUpTime')">
-      <ion-label>Hora a la que te has despertado:</ion-label>
-      <ion-text>{{ wakeUpTime || 'Seleccionar hora' }}</ion-text>
+      <ion-label>Hora y día a la que te has despertado:</ion-label>
+      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
     <ion-item button (click)="openTimePicker('sleepTime')">
-      <ion-label>Hora a la que te has acostado:</ion-label>
-      <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
+      <ion-label>Hora y día a la que te has acostado:</ion-label>
+      <ion-text>{{ sleepTime ? (sleepTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
     <ion-item>
