@@ -9,13 +9,11 @@ export class FirebaseService {
   constructor(private firestore: Firestore) {}
  
   // ------------- POSTS ------------- // 
-  // Formulario mañana
+  // Formularios (mañana y noche
   guardarFormulario(data: any): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
     return addDoc(collectionRef, data);
   }
-
-  // Formulario noche
 
   // ------------- GETS ------------- // 
   // Predicciones
@@ -24,7 +22,7 @@ export class FirebaseService {
 
   // Apps mas usadas
 
-  // Ansiendad
+  // Ansiedad
 
   // Depresión
 

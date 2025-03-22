@@ -20,16 +20,16 @@ export class FormularioComponent implements OnInit {
   // Formulario 1: Solo horas y descanso
   wakeUpTime: string = '';
   sleepTime: string = '';
-  restLevel: number = 5; // Grado de descanso
+  restLevel: number | null = null;
 
   // Formulario 2: Datos emocionales y de energía
-  timestamp: string = ''; // Marca de tiempo
-  avgAnxietyLevel: number = 5;
-  maxAnxietyLevel: number = 5;
-  sadnessLevel: number = 5;
-  happinessLevel: number = 5;
-  apathyLevel: number = 5;
-  avgEnergyLevel: number = 5;
+  timestamp: string = '';
+  avgAnxietyLevel: number | null = null;
+  maxAnxietyLevel: number | null = null;
+  sadnessLevel: number | null = null;
+  happinessLevel: number | null = null;
+  apathyLevel: number | null = null;
+  avgEnergyLevel: number | null = null;
 
   constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
 
@@ -78,31 +78,22 @@ export class FormularioComponent implements OnInit {
     await picker.present();
   }
 
-  /*submitForm() {
-    console.log('Formulario enviado con:', {
-      wakeUpTime: this.wakeUpTime,
-      sleepTime: this.sleepTime,
-      restLevel: this.restLevel,
-      timestamp: this.timestamp,
-      avgAnxietyLevel: this.avgAnxietyLevel,
-      maxAnxietyLevel: this.maxAnxietyLevel,
-      sadnessLevel: this.sadnessLevel,
-      happinessLevel: this.happinessLevel,
-      apathyLevel: this.apathyLevel,
-      avgEnergyLevel: this.avgEnergyLevel
-    });
-    alert('Formulario guardado correctamente.');
-  }*/
-
-  submitFormMorning() {
-    const datosFormulario = {
+  submitForm() {
+    const datosFormulario: any = {
       id_mor_form: this.generateUniqueId(),
       id_user: "testtttt2994e505-c82e-407f-97a0-86399687f652", // HAY que ver como obtengo el id del usuario
-      recorded_at: new Date(),
-      rest_level: this.restLevel,
-      sleep_time: this.sleepTime,  // HAY que ver como gestionar dia y hora
-      wake_up_time: this.wakeUpTime,  // HAY que ver como gestionar dia y hora
+      recorded_at: new Date()
     };
+
+    if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
+    if (this.sleepTime !== '') datosFormulario.sleep_time = this.sleepTime; // HAY que ver como como formateo la fecha
+    if (this.wakeUpTime !== '') datosFormulario.wake_up_time = this.wakeUpTime;  // HAY que ver como formateo la fecha
+    if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
+    if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
+    if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
+    if (this.happinessLevel !== null) datosFormulario.happinessLevel = this.happinessLevel;
+    if (this.apathyLevel !== null) datosFormulario.apathyLevel = this.apathyLevel;
+    if (this.avgEnergyLevel !== null) datosFormulario.avgEnergyLevel = this.avgEnergyLevel;
 
     console.log('Datos del formulario:', datosFormulario);
   
