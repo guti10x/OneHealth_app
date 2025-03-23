@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-tab-login',
@@ -7,17 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./tab-login.page.scss'],
   standalone: false
 })
-export class TabLoginPage implements OnInit {
 
-  constructor(private router: Router) { }
+export class TabLoginPage {
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   userId: string = '';
 
-  ngOnInit() {
-  }
-
   login() {
-    this.router.navigate(['/tabs']); 
+    this.authService.checkIfIdExists(this.userId).then((exists: boolean) => {
+      if (exists) {
+        console.log('ID válido, se puede hacer login');
+        this.router.navigate(['/tabs']); 
+      } else {
+        console.log('ID no encontrado, login no permitido');
+      }
+    });
   }
   
   redirectToNewID() {
