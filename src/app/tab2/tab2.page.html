@@ -5,5 +5,11 @@
 
   <!-- Formulario -->
   <app-formulario></app-formulario>
+
+  <div class="form-container3" *ngIf="pendingForm">
+    <p>Tienes un formulario pendiente por completar</p>
+    <button class="btn-completar" (click)="showPendingForm()" *ngIf="!mostrarPendingForm">✍️ Completar ahora</button>
+    <app-formulario *ngIf="mostrarPendingForm"></app-formulario>
+  </div>
  
 </ion-content>

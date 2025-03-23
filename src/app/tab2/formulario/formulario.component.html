@@ -23,13 +23,15 @@
   <div *ngIf="formType === 'formularioNoche'">
     <ion-item [ngClass]="{'error-border': formSubmitted && avgAnxietyLevel === null}">
       <ion-label>Nivel medio de ansiedad</ion-label>
-      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1"
+        snaps="true"></ion-range>
       <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
     </ion-item>
 
     <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
       <ion-label>Nivel máximo de ansiedad</ion-label>
-      <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+      <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1"
+        snaps="true"></ion-range>
       <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
     </ion-item>
   </div>
@@ -45,6 +47,6 @@
 
 </div>
 <div class="form-container2" *ngIf="formularioCompleto">
-  <span style="color: green; font-size: 24px;">✔</span>
+  <span class="check">✔</span>
   <p>Formulario completado exitosamente</p>
 </div>

@@ -23,3 +23,67 @@
 .spacer_header {
   height: 8vh;
 }
+
+.form-container3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fff, #f8f8f8);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px auto;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  border-left: 4px solid #f70000;
+  transition: transform 0.2s ease-in-out;
+}
+
+.form-container3:hover {
+  transform: scale(1.02);
+}
+
+.form-container3 p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #222;
+  margin: 0;
+}
+
+.form-container3 i {
+  color: #f70000;
+  font-size: 1.1rem;
+}
+
+.btn-completar {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-completar i {
+  font-size: 1rem;
+}
+
+.btn-completar:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, addDoc, query, where, Timestamp } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class FirebaseService {
   constructor(private firestore: Firestore) {}
  
   // ------------- POSTS ------------- // 
-  // Formularios (mañana y noche
+  // Formularios (mañana y noche)
   guardarFormulario(data: any): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
     return addDoc(collectionRef, data);
@@ -44,7 +44,9 @@ export class FirebaseService {
     return getDocs(collectionRef).then(snapshot => {
       return snapshot.docs.map(doc => doc.data());
     });
-  }
+  } 
 
+  // Función para verificar si existe un formulario en un rango de fechas
 
+  
 }
