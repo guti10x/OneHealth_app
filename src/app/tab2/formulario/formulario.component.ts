@@ -15,6 +15,9 @@ import { FirebaseService } from 'src/services/firebase.service';
 })
 
 export class FormularioComponent implements OnInit {
+
+  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
+
   @Input() formType: string = ''; // Recibe el tipo de formulario (mañana o noche)
 
   // Formulario 1: Solo horas y descanso
@@ -31,93 +34,134 @@ export class FormularioComponent implements OnInit {
   apathyLevel: number | null = null;
   avgEnergyLevel: number | null = null;
 
-  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
+  // Variables de error y validación
+  formError: string = '';
+  formSubmitted: boolean = false; // Indicador de que el formulario ha sido enviado
 
   ngOnInit(): void {}
 
-// Función para abrir el selector de fecha y hora
-async openTimePicker(field: string) {
-  const now = new Date();
-  const dates = [-1, 0, 1].map(offset => {
-    const date = new Date(now);
-    date.setDate(now.getDate() + offset);
-    return {
-      text: date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }),
-      value: date.toISOString().split('T')[0] // Formato YYYY-MM-DD
-    };
-  });
+  // Función para abrir el selector de fecha y hora
+  async openTimePicker(field: string) {
+    const now = new Date();
+    const dates = [-1, 0, 1].map(offset => {
+      const date = new Date(now);
+      date.setDate(now.getDate() + offset);
+      return {
+        text: date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }),
+        value: date.toISOString().split('T')[0] // Formato YYYY-MM-DD
+      };
+    });
 
-  const picker = await this.pickerCtrl.create({
-    columns: [
-      {
-        name: 'day',
-        options: dates
-      },
-      {
-        name: 'hours',
-        options: Array.from({ length: 24 }, (_, i) => ({
-          text: i.toString().padStart(2, '0'),
-          value: i
-        }))
-      },
-      {
-        name: 'minutes',
-        options: [
-          { text: '00', value: 0 },
-          { text: '15', value: 15 },
-          { text: '30', value: 30 },
-          { text: '45', value: 45 }
-        ]
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel'
-      },
-      {
-        text: 'OK',
-        handler: (value: any) => {
-          const selectedDate = value.day.value;
-          const formattedTime = `${selectedDate} ${value.hours.text}:${value.minutes.text}`;
-          if (field === 'wakeUpTime') {
-            this.wakeUpTime = new Date(formattedTime);
-          } else {
-            this.sleepTime = new Date(formattedTime);
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'day',
+          options: dates
+        },
+        {
+          name: 'hours',
+          options: Array.from({ length: 24 }, (_, i) => ({
+            text: i.toString().padStart(2, '0'),
+            value: i
+          }))
+        },
+        {
+          name: 'minutes',
+          options: [
+            { text: '00', value: 0 },
+            { text: '15', value: 15 },
+            { text: '30', value: 30 },
+            { text: '45', value: 45 }
+          ]
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler: (value: any) => {
+            const selectedDate = value.day.value;
+            const formattedTime = `${selectedDate} ${value.hours.text}:${value.minutes.text}`;
+            if (field === 'wakeUpTime') {
+              this.wakeUpTime = new Date(formattedTime);
+            } else {
+              this.sleepTime = new Date(formattedTime);
+            }
           }
         }
-      }
-    ]
-  });
+      ]
+    });
 
-  await picker.present();
-}
-
-  submitForm() {
-    const userId = localStorage.getItem('userId');
-    const datosFormulario: any = {
-      id_user: userId,
-      recorded_at: new Date()
-    };
-
-    if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
-    if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
-    if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;
-    if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
-    if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
-    if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
-    if (this.happinessLevel !== null) datosFormulario.happinessLevel = this.happinessLevel;
-    if (this.apathyLevel !== null) datosFormulario.apathyLevel = this.apathyLevel;
-    if (this.avgEnergyLevel !== null) datosFormulario.avgEnergyLevel = this.avgEnergyLevel;
-
-    console.log('Datos del formulario:', datosFormulario);
-  
-    this.firebaseService.guardarFormulario(datosFormulario)
-      .then(() => {
-        console.log("Datos guardados con éxito:", datosFormulario);
-      })
-      .catch(error => console.error("Error al guardar", error));
+    await picker.present();
   }
+
+  // Función de validación
+  validateForm() {
+    // Limpiar errores previos
+    this.formError = '';
+
+    if (this.formType === 'formularioMañana') {
+      // Validar si los valores no son nulos en formularioMañana
+      if (this.wakeUpTime === null || this.sleepTime === null || this.restLevel === null) {
+        this.formError = '❌ Error al enviar el formulario. Por favor, rellena todos los campos del formulario.';
+        return false;
+      }
+    }
+
+    if (this.formType === 'formularioNoche') {
+      // Validar si los valores no son nulos en formularioNoche
+      if (this.avgAnxietyLevel === null || this.maxAnxietyLevel === null || this.sadnessLevel === null ||
+        this.happinessLevel === null || this.apathyLevel === null || this.avgEnergyLevel === null) {
+          this.formError = '❌ Error al enviar el formulario. Por favor, rellena todos los campos del formulario.';
+        return false;
+      }
+    }
+
+    this.formSubmitted = true;
+    // Si todo es válido
+    return true;
+  }
+
+  // Función para enviar el formulario
+  submitForm() {
+    this.formSubmitted = true; // Establecemos que el formulario ha sido enviado
+
+    if (this.validateForm()) {
+      // Si el formulario es válido, continúa con el envío
+      const userId = localStorage.getItem('userId');
+      const datosFormulario: any = {
+        id_user: userId,
+        recorded_at: new Date()
+      };
+  
+      // Agregar los campos al formulario si no son nulos
+      if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
+      if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
+      if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;
+      if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
+      if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
+      if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
+      if (this.happinessLevel !== null) datosFormulario.happinessLevel = this.happinessLevel;
+      if (this.apathyLevel !== null) datosFormulario.apathyLevel = this.apathyLevel;
+      if (this.avgEnergyLevel !== null) datosFormulario.avgEnergyLevel = this.avgEnergyLevel;
+  
+      console.log('Datos del formulario:', datosFormulario);
+  
+      this.firebaseService.guardarFormulario(datosFormulario)
+        .then(() => {
+          console.log("Datos guardados con éxito:", datosFormulario);
+          this.formError = ''; // Limpiar error si todo salió bien
+        })
+        .catch(error => {
+          console.error("Error al guardar", error);
+          this.formError = 'Hubo un problema al enviar el formulario. Por favor, intenta de nuevo.';
+        });
+    }
+  }
+
 
   // Función para generar un ID del formulario
   private generateUniqueId(): string {

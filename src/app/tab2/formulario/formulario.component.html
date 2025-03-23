@@ -1,19 +1,19 @@
 <div class="form-container">
 
-  <p  *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
+  <p *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
 
   <div *ngIf="formType === 'formularioMañana'">
-    <ion-item button (click)="openTimePicker('wakeUpTime')">
+    <ion-item button (click)="openTimePicker('wakeUpTime')" [ngClass]="{'error-border': formSubmitted && !wakeUpTime}">
       <ion-label>Hora y día a la que te has despertado:</ion-label>
-      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
+      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
-    <ion-item button (click)="openTimePicker('sleepTime')">
+    <ion-item button (click)="openTimePicker('sleepTime')" [ngClass]="{'error-border': formSubmitted && !sleepTime}">
       <ion-label>Hora y día a la que te has acostado:</ion-label>
-      <ion-text>{{ sleepTime ? (sleepTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
+      <ion-text>{{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
-    <ion-item>
+    <ion-item [ngClass]="{'error-border': formSubmitted && restLevel === null}">
       <ion-label>Grado de descanso</ion-label>
       <ion-range [(ngModel)]="restLevel" name="restLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ restLevel }}</p>
@@ -21,44 +21,26 @@
   </div>
 
   <div *ngIf="formType === 'formularioNoche'">
-    <ion-item>
+    <ion-item [ngClass]="{'error-border': formSubmitted && avgAnxietyLevel === null}">
       <ion-label>Nivel medio de ansiedad</ion-label>
       <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Máximo nivel de ansiedad</ion-label>
+    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
+      <ion-label>Nivel máximo de ansiedad</ion-label>
       <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
     </ion-item>
+  </div>
 
-    <ion-item>
-      <ion-label>Grado medio de tristeza</ion-label>
-      <ion-range [(ngModel)]="sadnessLevel" name="sadnessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ sadnessLevel || '-' }}</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Grado medio de alegría</ion-label>
-      <ion-range [(ngModel)]="happinessLevel" name="happinessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ happinessLevel || '-' }}</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Grado de desgana</ion-label>
-      <ion-range [(ngModel)]="apathyLevel" name="apathyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ apathyLevel || '-' }}</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Nivel medio de energía</ion-label>
-      <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
-    </ion-item>
+  <!-- Error -->
+  <div *ngIf="formError" class="error-message">
+    {{ formError }}
   </div>
 
   <ion-button expand="full" class="submit-btn" (click)="submitForm()">
     Enviar
   </ion-button>
+
 </div>
