@@ -9,7 +9,6 @@ export class AuthService {
 
   constructor(private firestore: Firestore) {}
 
-
  // Método para verificar si un ID ya existe en Firestore
   async checkIfIdExists(id: string): Promise<boolean> {
     try {

@@ -14,14 +14,26 @@ export class TabLoginPage {
   constructor(private router: Router, private authService: AuthService) { }
 
   userId: string = '';
-
+  loginError = false;
+  emptyInputError = false;
+  
   login() {
+    if (!this.userId || this.userId.trim() === '') {
+      this.emptyInputError = true;
+      this.loginError = false;
+      return;
+    }
+  
     this.authService.checkIfIdExists(this.userId).then((exists: boolean) => {
       if (exists) {
         console.log('ID válido, se puede hacer login');
-        this.router.navigate(['/tabs']); 
+        this.loginError = false;
+        this.emptyInputError = false;
+        this.router.navigate(['/tabs']);
       } else {
         console.log('ID no encontrado, login no permitido');
+        this.loginError = true;
+        this.emptyInputError = false;
       }
     });
   }
