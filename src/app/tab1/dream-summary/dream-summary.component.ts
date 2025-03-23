@@ -18,6 +18,9 @@ export class DreamSummaryComponent  implements OnInit {
   timeSlept: string = '';
   time_sleep_diff: number = 19;
 
+  // Variable para mostrar componente (si hay o no hay datos)
+  dataAvailable: boolean = true;
+
   ngOnInit() {
     this.loadSleepData();
   }

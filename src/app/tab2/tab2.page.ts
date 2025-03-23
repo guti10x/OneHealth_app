@@ -22,7 +22,7 @@ export class Tab2Page {
   // Método para definir si es de día o noche 
   setFormTypeTime() {
     const currentHour = new Date().getHours();
-    this.formularioType = currentHour >= 6 && currentHour < 20 ? 'formularioMañana' : 'formularioNoche';
+    this.formularioType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
   }
 
   // Método para saber si el formulario se ha completado

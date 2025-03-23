@@ -1,13 +1,16 @@
 <div class="form-container">
+
+  <p  *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
+
   <div *ngIf="formType === 'formularioMañana'">
     <ion-item button (click)="openTimePicker('wakeUpTime')">
-      <ion-label>Hora a la que te has despertado:</ion-label>
-      <ion-text>{{ wakeUpTime || 'Seleccionar hora' }}</ion-text>
+      <ion-label>Hora y día a la que te has despertado:</ion-label>
+      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
     <ion-item button (click)="openTimePicker('sleepTime')">
-      <ion-label>Hora a la que te has acostado:</ion-label>
-      <ion-text>{{ sleepTime || 'Seleccionar hora' }}</ion-text>
+      <ion-label>Hora y día a la que te has acostado:</ion-label>
+      <ion-text>{{ sleepTime ? (sleepTime | date: 'short' ) : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
     <ion-item>
@@ -21,37 +24,37 @@
     <ion-item>
       <ion-label>Nivel medio de ansiedad</ion-label>
       <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ avgAnxietyLevel }}</p>
+      <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
     </ion-item>
 
     <ion-item>
       <ion-label>Máximo nivel de ansiedad</ion-label>
       <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ maxAnxietyLevel }}</p>
+      <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
     </ion-item>
 
     <ion-item>
-      <ion-label>Grado de tristeza</ion-label>
+      <ion-label>Grado medio de tristeza</ion-label>
       <ion-range [(ngModel)]="sadnessLevel" name="sadnessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ sadnessLevel }}</p>
+      <p class="value-display">{{ sadnessLevel || '-' }}</p>
     </ion-item>
 
     <ion-item>
-      <ion-label>Grado de alegría</ion-label>
+      <ion-label>Grado medio de alegría</ion-label>
       <ion-range [(ngModel)]="happinessLevel" name="happinessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ happinessLevel }}</p>
+      <p class="value-display">{{ happinessLevel || '-' }}</p>
     </ion-item>
 
     <ion-item>
       <ion-label>Grado de desgana</ion-label>
       <ion-range [(ngModel)]="apathyLevel" name="apathyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ apathyLevel }}</p>
+      <p class="value-display">{{ apathyLevel || '-' }}</p>
     </ion-item>
 
     <ion-item>
       <ion-label>Nivel medio de energía</ion-label>
       <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ avgEnergyLevel }}</p>
+      <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
     </ion-item>
   </div>
 

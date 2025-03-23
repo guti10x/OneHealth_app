@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <div class="login-container">
+    <ion-card class="login-card">
+      <img src="../../assets/plataforma_one_health_cover.png" alt="Login Image" class="login-image" />
+
+      <ion-card-content>
+        <ion-label class="login-label">Introduce el ID suministrado</ion-label>
+
+        <ion-item class="custom-input">
+          <ion-input type="text" [(ngModel)]="userId" placeholder="Tu ID"></ion-input>
+        </ion-item>
+
+        <!-- Mensaje de error si el input está vacío -->
+        <p *ngIf="emptyInputError" class="error-message empty-error">⚠️ Introduce un ID válido.</p>
+
+        <!-- Mensaje de error y botón si el ID no es válido -->
+        <div *ngIf="loginError" class="error-container">
+          <p class="error-message">
+            ❌ ID no registrado. Verifica que el ID introducido es correcto.
+            Si generas un nuevo ID, se perderán todos los datos asociados.
+            <button class="new-id-button" (click)="redirectToNewID()">Generar nuevo ID</button>
+          </p>
+        </div>
+
+        <!-- Botón de Entrar -->
+        <ion-button class="login-button" expand="block" (click)="login()">Entrar</ion-button>
+
+        <ion-button class="forgot-id-button" fill="clear" (click)="redirectToNewID()">
+          ¿No recuerdas tu ID?
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

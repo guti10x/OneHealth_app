@@ -14,10 +14,14 @@ export class MobileUsageStatsComponent  implements OnInit {
 
   ngOnInit() {}
 
+  // Variable para mostrar componente (si hay o no hay datos)
+  dataAvailable: boolean = false;
+
   // Tiempo total de uso del día
   totalUsageTime = '5 horas 34 minutos'; 
   // Variaciond del del tiempo de uso respecto al día anterior.
   usageChange = 15; 
+
   topApps = [
     { name: 'Mensajes', icon: 'chatbubbles', timeUsed: '1h 15m' },
     { name: 'Redes Sociales', icon: 'logo-facebook', timeUsed: '2h 45m' },

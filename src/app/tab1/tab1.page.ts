@@ -44,4 +44,5 @@ export class Tab1Page {
   nextSlide() {
     this.graficaActual = (this.graficaActual + 1) % 2;
   }
+
 }
