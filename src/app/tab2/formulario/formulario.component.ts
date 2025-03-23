@@ -20,6 +20,7 @@ export class FormularioComponent implements OnInit {
 
   // Tipo formulario
   formType: string = 'formulario'; // formularioNoche | formularioMañana
+  @Input() formMode: string = 'defaultForm'; // defaultForm | PendingForm
 
   // Variable para saber si el formulario se ha completado
   formularioCompleto: boolean = false;
@@ -52,7 +53,14 @@ export class FormularioComponent implements OnInit {
   // Método para definir si es de día o noche 
   setFormTypeTime() {
     const currentHour = new Date().getHours();
-    this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+    
+    if(this.formMode === 'defaultForm') {
+      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+    } else if (this.formMode === 'PendingForm') {
+      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioNoche' : 'formularioMañana';
+    } 
+
+    console.log('Tipo de formulario:', this.formType);
   }
 
   // Función para abrir el selector de fecha y hora

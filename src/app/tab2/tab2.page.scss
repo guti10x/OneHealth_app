@@ -28,7 +28,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 8px;
   background: linear-gradient(135deg, #fff, #f8f8f8);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
@@ -50,17 +49,27 @@
 
 .form-container3 p {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  text-align: left;
   font-size: 0.95rem;
   color: #222;
   margin: 0;
+  font-size: 1.04rem;
+  word-wrap: break-word;
 }
 
-.form-container3 i {
+.form-container3 ion-icon {
+  font-size: 1.7rem;
   color: #f70000;
-  font-size: 1.1rem;
+}
+
+.form-pending-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  margin-left: 5px;
 }
 
 .btn-completar {
@@ -81,6 +90,7 @@
 
 .btn-completar i {
   font-size: 1rem;
+  margin-right: 20px;
 }
 
 .btn-completar:hover {

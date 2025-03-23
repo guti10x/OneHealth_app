@@ -29,7 +29,7 @@ export class Tab2Page {
 
   setFormTypeTime() {
     const currentHour = new Date().getHours();
-    this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+    this.formType = currentHour >= 6 && currentHour < 17 ? 'formularioMañana' : 'formularioNoche';
   }
 
   showPendingForm(){
