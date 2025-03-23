@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CarouselDashComponent  implements OnInit {
 
+  constructor() {}
+
   items = [
     { title: '📊 Anomalías detectadas', content: 'Se espera un aumento del uso en un 15% esta semana.'},
     { title: '💡 Recomendación del día', content: 'Prueba reducir el tiempo en redes sociales antes de dormir.'}
@@ -20,9 +22,6 @@ export class CarouselDashComponent  implements OnInit {
 
   // Índice del slide actual del carrusel
   currentIndex = 0;
-  
-
-  constructor() {}
 
   ngOnInit() {
     setInterval(() => {

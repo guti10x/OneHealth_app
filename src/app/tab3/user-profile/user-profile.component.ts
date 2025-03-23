@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -12,8 +13,11 @@ export class UserProfileComponent  implements OnInit {
   ngOnInit() {}
 
   @Input() userId: string = 'ID-123456'; 
+  constructor(private router: Router) {}
 
-  constructor() {}
-
-
+  logout() {
+    localStorage.removeItem('userId');
+    this.router.navigate(['/tab-login']);
+  }
+  
 }

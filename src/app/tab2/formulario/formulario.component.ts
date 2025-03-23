@@ -94,9 +94,9 @@ async openTimePicker(field: string) {
 }
 
   submitForm() {
+    const userId = localStorage.getItem('userId');
     const datosFormulario: any = {
-      id_mor_form: this.generateUniqueId(),
-      id_user: "testtttt2994e505-c82e-407f-97a0-86399687f652", // HAY que ver como obtengo el id del usuario
+      id_user: userId,
       recorded_at: new Date()
     };
 

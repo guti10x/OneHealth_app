@@ -27,8 +27,13 @@ export class TabLoginPage {
     this.authService.checkIfIdExists(this.userId).then((exists: boolean) => {
       if (exists) {
         console.log('ID válido, se puede hacer login');
+
+        // Guardar el ID en localStorage
+        localStorage.setItem('userId', this.userId);
+      
         this.loginError = false;
         this.emptyInputError = false;
+        
         this.router.navigate(['/tabs']);
       } else {
         console.log('ID no encontrado, login no permitido');
