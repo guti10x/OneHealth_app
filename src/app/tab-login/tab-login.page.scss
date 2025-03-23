@@ -1,0 +1,40 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.login-card {
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-image {
+    width: 120px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+}
+
+.login-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.custom-input {
+    --highlight-color-focused: transparent;
+    --highlight-color-valid: transparent;
+
+    ion-input {
+        text-align: center;
+    }
+}
+
+ion-button {
+    margin-top: 15px;
+}

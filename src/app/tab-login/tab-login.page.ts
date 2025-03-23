@@ -11,6 +11,8 @@ export class TabLoginPage implements OnInit {
 
   constructor(private router: Router) { }
 
+  userId: string = '';
+
   ngOnInit() {
   }
 
@@ -18,5 +20,8 @@ export class TabLoginPage implements OnInit {
     this.router.navigate(['/tabs']); 
   }
   
+  redirectToNewID() {
+    window.location.href = 'https://onehealth-dowload.vercel.app';
+  }
 
 }
