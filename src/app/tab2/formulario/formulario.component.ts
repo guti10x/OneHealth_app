@@ -18,14 +18,24 @@ export class FormularioComponent implements OnInit {
 
   constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
 
-  @Input() formType: string = ''; // Recibe el tipo de formulario (mañana o noche)
+  // Tipo formulario
+  formType: string = 'formulario'; // formularioNoche | formularioMañana
 
-  // Formulario 1: Solo horas y descanso
+  // Variable para saber si el formulario se ha completado
+  formularioCompleto: boolean = false;
+
+  // Variables de error y validación
+  formError: string = '';
+
+  // Input inicializado
+  formSubmitted: boolean = false;
+
+  // Formulario 1
   wakeUpTime: Date | null = null;
   sleepTime: Date | null = null;
   restLevel: number | null = null;
 
-  // Formulario 2: Datos emocionales y de energía
+  // Formulario 2
   timestamp: Date | null = null;
   avgAnxietyLevel: number | null = null;
   maxAnxietyLevel: number | null = null;
@@ -34,11 +44,16 @@ export class FormularioComponent implements OnInit {
   apathyLevel: number | null = null;
   avgEnergyLevel: number | null = null;
 
-  // Variables de error y validación
-  formError: string = '';
-  formSubmitted: boolean = false; // Indicador de que el formulario ha sido enviado
+  ngOnInit(): void {
+    // Llamar a la función para saber si el formulario corresponde al de día o de noche
+    this.setFormTypeTime();
+  }
 
-  ngOnInit(): void {}
+  // Método para definir si es de día o noche 
+  setFormTypeTime() {
+    const currentHour = new Date().getHours();
+    this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+  }
 
   // Función para abrir el selector de fecha y hora
   async openTimePicker(field: string) {
@@ -153,7 +168,8 @@ export class FormularioComponent implements OnInit {
       this.firebaseService.guardarFormulario(datosFormulario)
         .then(() => {
           console.log("Datos guardados con éxito:", datosFormulario);
-          this.formError = ''; // Limpiar error si todo salió bien
+          this.formularioCompleto = true;
+          this.formError = ''; 
         })
         .catch(error => {
           console.error("Error al guardar", error);
@@ -161,7 +177,6 @@ export class FormularioComponent implements OnInit {
         });
     }
   }
-
 
   // Función para generar un ID del formulario
   private generateUniqueId(): string {

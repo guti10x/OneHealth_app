@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container" *ngIf="!formularioCompleto">
 
   <p *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
 
@@ -43,4 +43,8 @@
     Enviar
   </ion-button>
 
+</div>
+<div class="form-container2" *ngIf="formularioCompleto">
+  <span style="color: green; font-size: 24px;">✔</span>
+  <p>Formulario completado exitosamente</p>
 </div>
