@@ -20,4 +20,10 @@ export class UserProfileComponent  implements OnInit {
     this.router.navigate(['/tab-login']);
   }
   
+  downloadPrivacyPolicy() {
+    const link = document.createElement('a');
+    link.href = '/assets/docs/UE Consentimiento informado Proyecto App marzo 25.pdf';
+    link.download = 'privacy-policy.pdf';
+    link.click();
+  }
 }
