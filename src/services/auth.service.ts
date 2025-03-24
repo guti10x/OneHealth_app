@@ -12,7 +12,7 @@ export class AuthService {
  // Método para verificar si un ID ya existe en Firestore
   async checkIfIdExists(id: string): Promise<boolean> {
     try {
-      const q = query(collection(this.firestore, 'ids'), where('id', '==', id));
+      const q = query(collection(this.firestore, 'users'), where('id', '==', id));
       const querySnapshot = await getDocs(q);
       
       // Devuelve true si existe un id igual

@@ -40,27 +40,32 @@ export class Tab2Page {
 
   verificarFormularioPendiente() {
     const now = new Date();
-    const currentHour = now.getUTCHours();
-  
+    const currentHour = now.getUTCHours(); // 🔹 Usar UTC
+    
     let fechaInicio: number;
     let fechaFin: number;
-  
-    // Si estamos en el tramo de 6:00 - 17:59 UTC (formulario de la mañana)
-    if (currentHour >= 6 && currentHour < 18) {
-      // Buscar formularios de 18:00 (ayer) - 5:59 (hoy) UTC (formulario de la noche)
-      const ayerTarde = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 18, 0, 0, 0));
+    
+    // Si estamos en el tramo de 6:00 (hoy) - 18:59 (hoy)
+    if (currentHour >= 6 && currentHour < 19) {
+      // Buscar formularios de 19:00 (ayer) del día anterior a 6:00 (hoy) del día actual -> formulario de noche
+      const ayerTarde = new Date();
+      ayerTarde.setUTCDate(now.getUTCDate() - 1);
+      ayerTarde.setUTCHours(19, 0, 0, 0);
       fechaInicio = ayerTarde.getTime();
   
-      const hoyManana = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 5, 59, 59, 999));
+      const hoyManana = new Date();
+      hoyManana.setUTCHours(6, 0, 0, 0);
       fechaFin = hoyManana.getTime();
     } 
-    // Si estamos en el tramo de 18:00 - 5:59 UTC (formulario de la noche)
+    // Si estamos en el tramo de 19:00 (ayer) - 5:59 (hoy)
     else {
-      // Buscar formularios de 6:00 - 17:59 (hoy) UTC (formulario de la mañana)
-      const hoyManana = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 6, 0, 0, 0));
+      // Buscar formularios de 6:00 (hoy) - 19:00 (hoy) -> formulario mañana
+      const hoyManana = new Date();
+      hoyManana.setUTCHours(6, 0, 0, 0);
       fechaInicio = hoyManana.getTime();
   
-      const hoyTarde = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 18, 0, 0, 0));
+      const hoyTarde = new Date();
+      hoyTarde.setUTCHours(19, 0, 0, 0);
       fechaFin = hoyTarde.getTime();
     }
   
