@@ -1,11 +1,11 @@
 .completed-message {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #2ecc71; /* Color verde para indicar éxito */
+  color: #2ecc71;
   text-align: center;
   margin-top: 20px;
   padding: 10px;
-  background-color: #eaf7e2; /* Fondo suave verde */
+  background-color: #eaf7e2;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 90%;
@@ -14,9 +14,9 @@
 }
 
 .completed-message::before {
-  content: '✔'; /* Ícono de check */
+  content: '✔';
   font-size: 1.2rem;
-  color: #27ae60; /* Verde oscuro */
+  color: #27ae60;
   margin-right: 8px;
 }
 
@@ -66,10 +66,20 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 6px;
   margin: 8px 0;
   margin-left: 5px;
+
+  p{
+    padding: 0 10px;
+  }
+}
+
+#close_form{
+  margin-left: -10px;
+  font-size: 20px;
+  color: #f70000;
 }
 
 .btn-completar {
