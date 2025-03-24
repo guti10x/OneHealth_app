@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { FirebaseService } from 'src/services/firebase.service';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -9,7 +11,7 @@ import { Component } from '@angular/core';
 
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private firebaseService: FirebaseService) {}
 
   formType: string = '';
 
@@ -38,44 +40,46 @@ export class Tab2Page {
 
   verificarFormularioPendiente() {
     const now = new Date();
-    const currentHour = now.getUTCHours(); // 🔹 Usar UTC
+    const currentHour = now.getUTCHours();
   
     let fechaInicio: number;
     let fechaFin: number;
-
-    // Si estamos en el tramo "formulario mañana" (6:00 - 18:00) → Buscamos formularios del día anterior entre las 18:00 y las 6:00 de hoy.
+  
+    // Si estamos en el tramo de 6:00 - 17:59 UTC (formulario de la mañana)
     if (currentHour >= 6 && currentHour < 18) {
-      // Buscar entre 6:00 UTC y 18:00 UTC de ayer
-      const ayerManana = new Date();
-      ayerManana.setUTCDate(now.getUTCDate() - 1);
-      ayerManana.setUTCHours(6, 0, 0, 0);
-      fechaInicio = ayerManana.getTime();
+      // Buscar formularios de 18:00 (ayer) - 5:59 (hoy) UTC (formulario de la noche)
+      const ayerTarde = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 18, 0, 0, 0));
+      fechaInicio = ayerTarde.getTime();
   
-      const ayerTarde = new Date();
-      ayerTarde.setUTCDate(now.getUTCDate() - 1);
-      ayerTarde.setUTCHours(18, 0, 0, 0);
-      fechaFin = ayerTarde.getTime();
-
-    // Si estamos en el tramo "formulario noche" (18:00 - 6:00) → Buscamos formularios del día anterior entre las 6:00 y las 18:00.
-    } else {
-      // Buscar entre 18:00 UTC de ayer y 6:00 UTC de hoy
-      const ayer = new Date();
-      ayer.setUTCDate(now.getUTCDate() - 1);
-      ayer.setUTCHours(18, 0, 0, 0);
-      fechaInicio = ayer.getTime();
+      const hoyManana = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 5, 59, 59, 999));
+      fechaFin = hoyManana.getTime();
+    } 
+    // Si estamos en el tramo de 18:00 - 5:59 UTC (formulario de la noche)
+    else {
+      // Buscar formularios de 6:00 - 17:59 (hoy) UTC (formulario de la mañana)
+      const hoyManana = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 6, 0, 0, 0));
+      fechaInicio = hoyManana.getTime();
   
-      const hoy = new Date();
-      hoy.setUTCHours(6, 0, 0, 0);
-      fechaFin = hoy.getTime();
+      const hoyTarde = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 18, 0, 0, 0));
+      fechaFin = hoyTarde.getTime();
     }
   
     const userId = localStorage.getItem('userId');
     if (userId) {
-      console.log("Buscar formularios entre", new Date(fechaInicio).toLocaleString(), "y", new Date(fechaFin).toLocaleString());
-      // Servicio pendiente para consultas
-      this.pendingForm = true;
+      console.log("Buscar formularios entre", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
+      
+      // Llamada al servicio correctamente estructurada
+      this.firebaseService.obtenerFormularios(fechaInicio, fechaFin)
+        .then(formularios => {
+          this.pendingForm = formularios.length > 0;
+        })
+        .catch(error => {
+          console.error("Error al obtener formularios:", error);
+        });
+  
     } else {
       console.error('No se encontró el userId en el localStorage.');
     }
   }
+  
 }
