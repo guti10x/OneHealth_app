@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { FirebaseService } from 'src/services/firebase.service';
 
 @Component({
   selector: 'app-dream-summary',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 export class DreamSummaryComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private firebaseService : FirebaseService) { }
 
   hoursOfSleep: number = 0;
   sleepQuality: string = '';
@@ -25,10 +26,26 @@ export class DreamSummaryComponent  implements OnInit {
     this.loadSleepData();
   }
 
+  // Función para obtener los datos de sueño
   loadSleepData() {
-    this.hoursOfSleep = 8;
-    this.sleepQuality = 'Good';  
-    this.timeSlept = '10:30 PM - 6:30 AM';
+    // const userId = localStorage.getItem('userId'); // Si prefieres obtenerlo del localStorage
+    const userId = "xk0vkwrik"; // ID de usuario de prueba
+    
+    console.log(userId);
+    if (!userId) {
+      console.error('User ID not found in localStorage');
+      return;
+    }
+  
+    this.firebaseService.obtenerFormularioMasReciente(userId).then(data => {
+      if (!data) {
+        console.error('No sleep data found for user');
+        return;
+      }
+  
+    }).catch(error => {
+      console.error('Error fetching sleep data:', error);
+    });
   }
 
   getSleepQualityClass(quality: string): string {
