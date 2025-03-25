@@ -14,9 +14,11 @@
 
       <div class="sleep-info">
         <p class="sleep-text">
-          <span>Horas de sueño:</span> <strong>{{ hoursOfSleep }} horas</strong>
+          <ion-icon name="bed" class="icon-bed"></ion-icon>
+          <span>Horas de sueño:</span> <strong>{{ timeSlept }} horas</strong>
         </p>
-        <ion-icon name="bed" class="icon-bed"></ion-icon>
+        
+        <p>{{formattedSleepTime}} - {{formattedWakeUpTime}}</p>
       </div>
 
       <p *ngIf="time_sleep_diff > 0" class="usage-change positive">+{{ time_sleep_diff }} minutos respecto ayer</p>
@@ -26,8 +28,8 @@
       <!-- Información adicional con calidad del sueño visual -->
       <div class="additional-info">
         <p><strong>Calidad del sueño:</strong></p>
-        <div [ngClass]="getSleepQualityClass(sleepQuality)" class="quality-badge">
-          <ion-icon [name]="getSleepQualityIcon(sleepQuality)"></ion-icon>
+        <div [ngClass]="getSleepQualityClass(sleepQuality || 0)" class="quality-badge">
+          <ion-icon [name]="getSleepQualityIcon(sleepQuality || 0)"></ion-icon>
           <span>{{ sleepQuality }}</span>
         </div>
       </div>
