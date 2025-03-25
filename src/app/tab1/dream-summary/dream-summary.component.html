@@ -14,14 +14,12 @@
 
       <div class="sleep-info">
         <p class="sleep-text">
+          <ion-icon name="bed" class="icon-bed"></ion-icon>
           <span>Horas de sueño:</span> <strong>{{ hoursOfSleep }} horas</strong>
         </p>
-        <ion-icon name="bed" class="icon-bed"></ion-icon>
+        <p *ngIf="time_sleep_diff > 0" class="usage-change positive">+{{ time_sleep_diff }} minutos respecto ayer</p>
+        <p *ngIf="time_sleep_diff < 0" class="usage-change negative">{{ time_sleep_diff }} minutos respecto ayer</p>
       </div>
-
-      <p *ngIf="time_sleep_diff > 0" class="usage-change positive">+{{ time_sleep_diff }} minutos respecto ayer</p>
-      <p *ngIf="time_sleep_diff < 0" class="usage-change negative">{{ time_sleep_diff }} minutos respecto ayer</p>
-      <p *ngIf="time_sleep_diff === 0" class="usage-change neutral">Igual que ayer</p>
 
       <!-- Información adicional con calidad del sueño visual -->
       <div class="additional-info">

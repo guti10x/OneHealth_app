@@ -10,9 +10,14 @@ export class Tab1Page {
 
   constructor() {}
 
+  ///////// CARRUSEL DE GRÁFICAS ////////////////////////////////////
+
+  // Variables para carrusel de gráficas
   graficaActual = 0;
   touchStartX = 0;
   touchEndX = 0;
+  // Variable para mostrar componentes carrusel de gráficas
+  carrusel_components_visibles: boolean = false;
 
   // Al tocar la pantalla, guardamos la posición inicial
   onTouchStart(event: TouchEvent) {

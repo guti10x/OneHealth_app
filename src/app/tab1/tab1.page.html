@@ -14,7 +14,7 @@
   <app-mobile-usage-stats></app-mobile-usage-stats>
 
   <!-- Gráficas de ansiedad y estrés -->
-  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" *ngIf="carrusel_components_visibles">
     <!-- Flecha de retroceso usando Ion Icon -->
     <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
 
@@ -28,7 +28,7 @@
     <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
   </div>
   <!-- Indicadores carrusel de gráficas -->
-  <div class="indicators">
+  <div class="indicators" *ngIf="carrusel_components_visibles">
     <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
   </div>
 

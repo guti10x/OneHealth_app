@@ -17,10 +17,7 @@ export class TimeValueGraphComponent implements OnInit, AfterViewInit {
 
   data: number[] = [0, 20, 30, 50, 60, 70, 100];
   labels: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-  chart: any;
-
-  // Variable para mostrar componente (si hay o no hay datos)
-  dataAvailable: boolean = true;
+  chart: any;  
 
   constructor() {
     Chart.register(...registerables);
