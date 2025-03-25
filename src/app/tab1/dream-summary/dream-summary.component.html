@@ -15,10 +15,10 @@
       <div class="sleep-info">
         <p class="sleep-text">
           <ion-icon name="bed" class="icon-bed"></ion-icon>
-          <span>Horas de sueño:</span> <strong>{{ timeSlept }} horas</strong>
+          <span>Horas de sueño: {{ timeSlept }}</span>
         </p>
         
-        <p>{{formattedSleepTime}} - {{formattedWakeUpTime}}</p>
+        <p class="range_sleep_time">{{formattedSleepTime}} - {{formattedWakeUpTime}}</p>
       </div>
 
       <p *ngIf="time_sleep_diff > 0" class="usage-change positive">+{{ time_sleep_diff }} minutos respecto ayer</p>

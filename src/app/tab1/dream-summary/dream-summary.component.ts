@@ -59,7 +59,11 @@ export class DreamSummaryComponent  implements OnInit {
       this.formattedSleepTime = this.formatTime(data.sleep_time);
       this.formattedWakeUpTime = this.formatTime(data.wake_up_time);
       
-  
+      // Tiempo dormido
+      this.timeSlept = this.calculateSleepDuration(data.sleep_time, data.wake_up_time);
+      console.log("El wey durmió ",this.timeSlept);
+
+
     }).catch(error => {
       console.error('Error fetching sleep data:', error);
     });
@@ -81,6 +85,25 @@ export class DreamSummaryComponent  implements OnInit {
     return `${formattedHours}:${formattedMinutes} ${amPm}`;
   }
   
+  // Calcular duración del sueño
+  calculateSleepDuration(sleepTimestamp: any, wakeTimestamp: any): string {
+    if (!sleepTimestamp || !wakeTimestamp) return '';
+  
+    const sleepTime = sleepTimestamp.toDate();
+    const wakeTime = wakeTimestamp.toDate();
+  
+    let diffMs = wakeTime.getTime() - sleepTime.getTime();
+  
+    // Si el usuario se durmió un día y despertó al día siguiente -> sumar 24 horas
+    if (diffMs < 0) {
+      diffMs += 24 * 60 * 60 * 1000;
+    }
+  
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  
+    return `${hours}h ${minutes}m`;
+  }
 
   getSleepQualityClass(quality: number): string {
     if (quality >= 8) {
