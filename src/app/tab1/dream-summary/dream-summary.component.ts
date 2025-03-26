@@ -18,7 +18,7 @@ export class DreamSummaryComponent  implements OnInit {
   wake_up_time: Date | null = null; formattedWakeUpTime: string = '';
   timeSlept: string = '';
   sleepQuality: number | null = null;
-  time_sleep_diff: number = 19;
+  time_sleep_diff: number | null = null;
 
   // Variable para mostrar componente (si hay o no hay datos)
   dataAvailable: boolean = true;
@@ -26,9 +26,10 @@ export class DreamSummaryComponent  implements OnInit {
   ngOnInit() {
     this.loadSleepData();
 
-    this.firebaseService.buscarFormularioDiaAnterior("xk0vkwrik")
+    this.calcularHorasSuenoAyer("xk0vkwrik");
   }
 
+  ////////////////////// OBTENER DATOS ////////////////////////////////////////////
   // Función para obtener los datos de sueño
   loadSleepData() {
     const userId = localStorage.getItem('userId');
@@ -66,6 +67,7 @@ export class DreamSummaryComponent  implements OnInit {
     });
   }
 
+  ////////////////////// PROCESAR DATOS ////////////////////////////////////////////
   // Formatear timestamps a hora + am/pm
   formatTime(timestamp: any): string {
     if (!timestamp) return '';
@@ -102,6 +104,39 @@ export class DreamSummaryComponent  implements OnInit {
     return `${hours}h ${minutes}m`;
   }
 
+  // Calcular tiempo de sueño de ayer
+  calcularHorasSuenoAyer(id: string): void {
+    this.firebaseService.buscarFormularioDiaAnterior(id).then(formularioDia => {
+        if (!formularioDia) {
+            console.log("No hay formulario de ayer entre 6:00 y 18:00.");
+            return;
+        }
+
+        this.firebaseService.obtenerFormularioMasReciente(id).then(formularioActual => {
+            if (!formularioActual) {
+                console.log("No hay formulario reciente para calcular el sueño.");
+                return;
+            }
+
+            const sleepTime = formularioActual.sleep_time.toDate();
+            const wakeUpTime = formularioDia.wake_up_time.toDate();
+
+            if (sleepTime && wakeUpTime) {
+                const diffMs = sleepTime.getTime() - wakeUpTime.getTime();
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                const timeSlept = `${diffHours}h ${diffMinutes}m`;
+                console.log("Horas de sueño:", timeSlept);
+            } else {
+                console.log("Datos insuficientes para calcular horas de sueño.");
+            }
+        });
+    });
+  }
+
+  ////////////////////// DEFINIR ESTILOS ////////////////////////////////////////////
+  // Definir estilos de calidad de sueño
   getSleepQualityClass(quality: number): string {
     if (quality >= 8) {
       return 'good-sleep';
@@ -114,16 +149,17 @@ export class DreamSummaryComponent  implements OnInit {
     }
   }
   
+  // Definir ícono de calidad de sueño
   getSleepQualityIcon(quality: number): string {
     if (quality >= 8) {
       return 'happy';
     } else if (quality >= 5) {
-      return 'alert';
+      return 'neutral';
     } else if (quality >= 0) {
       return 'sad';
     } else {
       return 'help-circle';
     }
-  }
+  }  
 
 }

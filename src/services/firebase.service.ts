@@ -8,23 +8,16 @@ export class FirebaseService {
 
   constructor(private firestore: Firestore) {}
  
-  // ------------- POSTS ------------- // 
+  // -------------------------- POSTS ----------------------------------------------------------- // 
   // Formularios (mañana y noche
   guardarFormulario(data: any): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
     return addDoc(collectionRef, data);
   }
 
-  // ------------- GETS ------------- // 
-  // Predicciones / Alertas
-  obtenerPredicciones(): Promise<any> {
-    const collectionRef = collection(this.firestore, 'predictions');
-    return getDocs(collectionRef).then(snapshot => {
-      return snapshot.docs.map(doc => doc.data());
-    });
-  }
-
-  // Obtener Datos de sueño
+  // ----------------- GETS ----------------------------------------------------------- // 
+  
+  // ------------ Datos de sueño --------------------------------- //
 
   // Obtener el último registro recogido de datos del sueño por un formulario asociado a un id
   obtenerFormularioMasReciente(id: string): Promise<any> {
@@ -50,23 +43,19 @@ export class FirebaseService {
         data['recorded_at'] = data['recorded_at'].toDate();
       }
   
-      console.log(data);
+      console.log("Datos del formulario a mostrar:", data);
       return data;
     });
   }
 
   buscarFormularioDiaAnterior(id: string): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
-
-    // Obtener fecha de ayer
+  
+    // Obtener fecha de ayer en UTC
     const ahora = new Date();
-    const ayer = new Date();
-    ayer.setDate(ahora.getDate() - 1);
-    ayer.setHours(6, 0, 0, 0); // 6:00 AM de ayer
-
-    const limite = new Date(ayer);
-    limite.setHours(18, 0, 0, 0); // 6:00 PM de ayer
-
+    const ayer = new Date(Date.UTC(ahora.getUTCFullYear(), ahora.getUTCMonth(), ahora.getUTCDate() - 1, 6, 0, 0, 0)); // 6:00 AM UTC de ayer
+    const limite = new Date(Date.UTC(ayer.getUTCFullYear(), ayer.getUTCMonth(), ayer.getUTCDate(), 18, 0, 0, 0)); // 6:00 PM UTC de ayer
+  
     const q = query(
       collectionRef,
       where('id_user', '==', id),
@@ -75,34 +64,37 @@ export class FirebaseService {
       orderBy('recorded_at', 'desc'),
       limit(1)
     );
-
+  
     return getDocs(q).then(snapshot => {
       if (snapshot.empty) {
-        console.log("No se encontraron formularios en el rango especificado.");
+        console.log(`No se encontraron formularios en el rango especificado. Rango: desde ${ayer.toISOString()} hasta ${limite.toISOString()}.`);
         return null;
       }
-
+  
       const doc = snapshot.docs[0];
       const data = doc.data();
       data['id'] = doc.id;
-
+  
       if (data['recorded_at'] && data['recorded_at'].toDate) {
         data['recorded_at'] = data['recorded_at'].toDate();
       }
-
+  
       console.log("Formulario del día anterior:", data);
       return data;
     });
-  }
+  }  
+  
 
-  // Datos de uso del móvil
+  // ------------ Datos de uso del móvil ------------------------- //
   obtenerDatosApps(): Promise<any> {
     const collectionRef = collection(this.firestore, 'mobile_data');
     return getDocs(collectionRef).then(snapshot => {
       return snapshot.docs.map(doc => doc.data());
     });
   }
-  // Datos biométricos
+
+
+  // ------------ Datos de biométricos -------------------------- //
   obtenerDatosBiometricos(): Promise<any> {
     const collectionRef = collection(this.firestore, 'biometric_data');
     return getDocs(collectionRef).then(snapshot => {
@@ -111,4 +103,11 @@ export class FirebaseService {
   }
 
 
+  // ------------ Datos de Predicciones / Alertas --------------- //
+  obtenerPredicciones(): Promise<any> {
+    const collectionRef = collection(this.firestore, 'predictions');
+    return getDocs(collectionRef).then(snapshot => {
+      return snapshot.docs.map(doc => doc.data());
+    });
+  }
 }
