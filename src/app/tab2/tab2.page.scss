@@ -1,11 +1,11 @@
 .completed-message {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #2ecc71; /* Color verde para indicar éxito */
+  color: #2ecc71;
   text-align: center;
   margin-top: 20px;
   padding: 10px;
-  background-color: #eaf7e2; /* Fondo suave verde */
+  background-color: #eaf7e2;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 90%;
@@ -14,12 +14,96 @@
 }
 
 .completed-message::before {
-  content: '✔'; /* Ícono de check */
+  content: '✔';
   font-size: 1.2rem;
-  color: #27ae60; /* Verde oscuro */
+  color: #27ae60;
   margin-right: 8px;
 }
 
 .spacer_header {
   height: 8vh;
+}
+
+.form-container3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fff, #f8f8f8);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px auto;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  border-left: 4px solid #f70000;
+  transition: transform 0.2s ease-in-out;
+}
+
+.form-container3:hover {
+  transform: scale(1.02);
+}
+
+.form-container3 p {
+  display: flex;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #222;
+  margin: 0;
+  font-size: 1.04rem;
+  word-wrap: break-word;
+}
+
+.form-container3 ion-icon {
+  font-size: 1.7rem;
+  color: #f70000;
+}
+
+.form-pending-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0;
+  margin-left: 5px;
+
+  p{
+    padding: 0 10px;
+  }
+}
+
+#close_form{
+  margin-left: -10px;
+  font-size: 20px;
+  color: #f70000;
+}
+
+.btn-completar {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-completar i {
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.btn-completar:hover {
+  background: #cc0000;
+  transform: scale(1.05);
 }

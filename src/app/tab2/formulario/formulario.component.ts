@@ -15,14 +15,28 @@ import { FirebaseService } from 'src/services/firebase.service';
 })
 
 export class FormularioComponent implements OnInit {
-  @Input() formType: string = ''; // Recibe el tipo de formulario (mañana o noche)
 
-  // Formulario 1: Solo horas y descanso
+  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
+
+  // Tipo formulario
+  formType: string = 'formulario'; // formularioNoche | formularioMañana
+  @Input() formMode: string = 'defaultForm'; // defaultForm | PendingForm
+
+  // Variable para saber si el formulario se ha completado
+  formularioCompleto: boolean = false;
+
+  // Variables de error y validación
+  formError: string = '';
+
+  // Input inicializado
+  formSubmitted: boolean = false;
+
+  // Formulario 1
   wakeUpTime: Date | null = null;
   sleepTime: Date | null = null;
   restLevel: number | null = null;
 
-  // Formulario 2: Datos emocionales y de energía
+  // Formulario 2
   timestamp: Date | null = null;
   avgAnxietyLevel: number | null = null;
   maxAnxietyLevel: number | null = null;
@@ -31,96 +45,150 @@ export class FormularioComponent implements OnInit {
   apathyLevel: number | null = null;
   avgEnergyLevel: number | null = null;
 
-  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
+  ngOnInit(): void {
+    // Llamar a la función para saber si el formulario corresponde al de día o de noche
+    this.setFormTypeTime();
+  }
 
-  ngOnInit(): void {}
+  // Método para definir si es de día o noche 
+  setFormTypeTime() {
+    const currentHour = new Date().getHours();
+    
+    if(this.formMode === 'defaultForm') {
+      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+    } else if (this.formMode === 'PendingForm') {
+      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioNoche' : 'formularioMañana';
+    } 
 
-// Función para abrir el selector de fecha y hora
-async openTimePicker(field: string) {
-  const now = new Date();
-  const dates = [-1, 0, 1].map(offset => {
-    const date = new Date(now);
-    date.setDate(now.getDate() + offset);
-    return {
-      text: date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }),
-      value: date.toISOString().split('T')[0] // Formato YYYY-MM-DD
-    };
-  });
+    console.log('Tipo de formulario:', this.formType);
+  }
 
-  const picker = await this.pickerCtrl.create({
-    columns: [
-      {
-        name: 'day',
-        options: dates
-      },
-      {
-        name: 'hours',
-        options: Array.from({ length: 24 }, (_, i) => ({
-          text: i.toString().padStart(2, '0'),
-          value: i
-        }))
-      },
-      {
-        name: 'minutes',
-        options: [
-          { text: '00', value: 0 },
-          { text: '15', value: 15 },
-          { text: '30', value: 30 },
-          { text: '45', value: 45 }
-        ]
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel'
-      },
-      {
-        text: 'OK',
-        handler: (value: any) => {
-          const selectedDate = value.day.value;
-          const formattedTime = `${selectedDate} ${value.hours.text}:${value.minutes.text}`;
-          if (field === 'wakeUpTime') {
-            this.wakeUpTime = new Date(formattedTime);
-          } else {
-            this.sleepTime = new Date(formattedTime);
+  // Función para abrir el selector de fecha y hora
+  async openTimePicker(field: string) {
+    const now = new Date();
+    const dates = [-1, 0, 1].map(offset => {
+      const date = new Date(now);
+      date.setDate(now.getDate() + offset);
+      return {
+        text: date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }),
+        value: date.toISOString().split('T')[0] // Formato YYYY-MM-DD
+      };
+    });
+
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'day',
+          options: dates
+        },
+        {
+          name: 'hours',
+          options: Array.from({ length: 24 }, (_, i) => ({
+            text: i.toString().padStart(2, '0'),
+            value: i
+          }))
+        },
+        {
+          name: 'minutes',
+          options: [
+            { text: '00', value: 0 },
+            { text: '15', value: 15 },
+            { text: '30', value: 30 },
+            { text: '45', value: 45 }
+          ]
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler: (value: any) => {
+            const selectedDate = value.day.value;
+            const formattedTime = `${selectedDate} ${value.hours.text}:${value.minutes.text}`;
+            if (field === 'wakeUpTime') {
+              this.wakeUpTime = new Date(formattedTime);
+            } else {
+              this.sleepTime = new Date(formattedTime);
+            }
           }
         }
+      ]
+    });
+
+    await picker.present();
+  }
+
+  // Función de validación
+  validateForm() {
+    // Limpiar errores previos
+    this.formError = '';
+
+    if (this.formType === 'formularioMañana') {
+      // Validar si los valores no son nulos en formularioMañana
+      if (this.wakeUpTime === null || this.sleepTime === null || this.restLevel === null) {
+        this.formError = '❌ Error al enviar el formulario. Por favor, rellena todos los campos del formulario.';
+        return false;
       }
-    ]
-  });
+    }
 
-  await picker.present();
-}
+    if (this.formType === 'formularioNoche') {
+      // Validar si los valores no son nulos en formularioNoche
+      if (this.avgAnxietyLevel === null || this.maxAnxietyLevel === null || this.sadnessLevel === null ||
+        this.happinessLevel === null || this.apathyLevel === null || this.avgEnergyLevel === null) {
+          this.formError = '❌ Error al enviar el formulario. Por favor, rellena todos los campos del formulario.';
+        return false;
+      }
+    }
 
+    this.formSubmitted = true;
+    // Si todo es válido
+    return true;
+  }
+
+  // Función para enviar el formulario
   submitForm() {
-    const userId = localStorage.getItem('userId');
-    const datosFormulario: any = {
-      id_user: userId,
-      recorded_at: new Date()
-    };
+    this.formSubmitted = true; // Establecemos que el formulario ha sido enviado
 
-    if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
-    if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
-    if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;
-    if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
-    if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
-    if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
-    if (this.happinessLevel !== null) datosFormulario.happinessLevel = this.happinessLevel;
-    if (this.apathyLevel !== null) datosFormulario.apathyLevel = this.apathyLevel;
-    if (this.avgEnergyLevel !== null) datosFormulario.avgEnergyLevel = this.avgEnergyLevel;
-
-    console.log('Datos del formulario:', datosFormulario);
+    if (this.validateForm()) {
+      // Si el formulario es válido, continúa con el envío
+      const userId = localStorage.getItem('userId');
+      const datosFormulario: any = {
+        id_user: userId,
+        recorded_at: new Date()
+      };
   
-    this.firebaseService.guardarFormulario(datosFormulario)
-      .then(() => {
-        console.log("Datos guardados con éxito:", datosFormulario);
-      })
-      .catch(error => console.error("Error al guardar", error));
+      // Agregar los campos al formulario si no son nulos
+      if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
+      if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
+      if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;
+      if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
+      if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
+      if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
+      if (this.happinessLevel !== null) datosFormulario.happinessLevel = this.happinessLevel;
+      if (this.apathyLevel !== null) datosFormulario.apathyLevel = this.apathyLevel;
+      if (this.avgEnergyLevel !== null) datosFormulario.avgEnergyLevel = this.avgEnergyLevel;
+  
+      console.log('Datos del formulario:', datosFormulario);
+  
+      this.firebaseService.guardarFormulario(datosFormulario)
+        .then(() => {
+          console.log("Datos guardados con éxito:", datosFormulario);
+          this.formularioCompleto = true;
+          this.formError = ''; 
+        })
+        .catch(error => {
+          console.error("Error al guardar", error);
+          this.formError = 'Hubo un problema al enviar el formulario. Por favor, intenta de nuevo.';
+        });
+    }
   }
 
   // Función para generar un ID del formulario
   private generateUniqueId(): string {
     return Math.random().toString(36).substr(2, 9);
   }
+
 }
