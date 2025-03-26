@@ -10,10 +10,13 @@ import { IonicModule } from '@ionic/angular';
 })
 export class UserProfileComponent  implements OnInit {
 
-  ngOnInit() {}
-
-  @Input() userId: string = 'ID-123456'; 
   constructor(private router: Router) {}
+
+  userId: string = ''; 
+
+  ngOnInit() {
+    this.userId = localStorage.getItem('userId') || '';
+  }
 
   logout() {
     localStorage.removeItem('userId');

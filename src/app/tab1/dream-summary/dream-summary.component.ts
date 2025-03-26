@@ -14,15 +14,10 @@ export class DreamSummaryComponent  implements OnInit {
 
   constructor(private firebaseService : FirebaseService) { }
 
-  timeSlept: string = '';
-
   sleep_time: Date | null = null; formattedSleepTime: string = '';
   wake_up_time: Date | null = null; formattedWakeUpTime: string = '';
-
-  hoursOfSleep: number = 0;
+  timeSlept: string = '';
   sleepQuality: number | null = null;
-
-  
   time_sleep_diff: number = 19;
 
   // Variable para mostrar componente (si hay o no hay datos)
@@ -30,12 +25,14 @@ export class DreamSummaryComponent  implements OnInit {
 
   ngOnInit() {
     this.loadSleepData();
+
+    this.firebaseService.buscarFormularioDiaAnterior("xk0vkwrik")
   }
 
   // Función para obtener los datos de sueño
   loadSleepData() {
-    // const userId = localStorage.getItem('userId');
-    const userId = "xk0vkwrik";
+    const userId = localStorage.getItem('userId');
+    //const userId = "xk0vkwrik";
     
     console.log(userId);
     if (!userId) {
@@ -61,8 +58,8 @@ export class DreamSummaryComponent  implements OnInit {
       
       // Tiempo dormido
       this.timeSlept = this.calculateSleepDuration(data.sleep_time, data.wake_up_time);
-      console.log("El wey durmió ",this.timeSlept);
 
+      // Diferencia de tiempo de sueño respecto
 
     }).catch(error => {
       console.error('Error fetching sleep data:', error);

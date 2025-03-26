@@ -53,7 +53,47 @@ export class FirebaseService {
       console.log(data);
       return data;
     });
-  }  
+  }
+
+  buscarFormularioDiaAnterior(id: string): Promise<any> {
+    const collectionRef = collection(this.firestore, 'formularios');
+
+    // Obtener fecha de ayer
+    const ahora = new Date();
+    const ayer = new Date();
+    ayer.setDate(ahora.getDate() - 1);
+    ayer.setHours(6, 0, 0, 0); // 6:00 AM de ayer
+
+    const limite = new Date(ayer);
+    limite.setHours(18, 0, 0, 0); // 6:00 PM de ayer
+
+    const q = query(
+      collectionRef,
+      where('id_user', '==', id),
+      where('recorded_at', '>=', ayer),
+      where('recorded_at', '<=', limite),
+      orderBy('recorded_at', 'desc'),
+      limit(1)
+    );
+
+    return getDocs(q).then(snapshot => {
+      if (snapshot.empty) {
+        console.log("No se encontraron formularios en el rango especificado.");
+        return null;
+      }
+
+      const doc = snapshot.docs[0];
+      const data = doc.data();
+      data['id'] = doc.id;
+
+      if (data['recorded_at'] && data['recorded_at'].toDate) {
+        data['recorded_at'] = data['recorded_at'].toDate();
+      }
+
+      console.log("Formulario del día anterior:", data);
+      return data;
+    });
+  }
 
   // Datos de uso del móvil
   obtenerDatosApps(): Promise<any> {
