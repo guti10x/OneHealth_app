@@ -42,7 +42,7 @@ ion-card-title {
 /* Icono de la luna en el título */
 .icon-moon {
     font-size: 22px;
-    color: #f1c40f;
+    color: #f1c40f; /* Amarillo cálido */
     margin-right: 6px;
 }
 
@@ -62,13 +62,20 @@ ion-card-title {
 .sleep-text {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: 5px;
+    gap: 3px;
     font-size: 1rem;
     color: #2c3e50;
     font-weight: 600;
     flex-grow: 1;
     text-align: left;
+
+    span{
+        margin-top: 3px;
+    }
+}
+
+.range_sleep_time{
+    margin-right: 20px;
 }
 
 /* Icono de la cama */
@@ -112,17 +119,17 @@ ion-card-title {
 
 /* Clases dinámicas para la calidad */
 .good-sleep {
-    background: #2ecc71;
+    background: #2ecc71; /* Verde */
     color: white;
 }
 
 .medium-sleep {
-    background: #f1c40f;
+    background: #f1c40f; /* Amarillo */
     color: black;
 }
 
 .bad-sleep {
-    background: #e74c3c;
+    background: #e74c3c; /* Rojo */
     color: white;
 }
 
