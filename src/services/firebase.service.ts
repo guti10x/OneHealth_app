@@ -7,6 +7,8 @@ import { Firestore, collection, getDocs, addDoc, query, where, orderBy, limit, T
 export class FirebaseService {
 
   constructor(private firestore: Firestore) {}
+
+  init(){}
  
   // -------------------------- POSTS ----------------------------------------------------------- // 
   // Formularios (mañana y noche
