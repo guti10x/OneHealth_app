@@ -16,7 +16,7 @@ export class TabLoginPage {
   userId: string = '';
   loginError = false;
   emptyInputError = false;
-  
+
   login() {
     if (!this.userId || this.userId.trim() === '') {
       this.emptyInputError = true;
@@ -42,7 +42,7 @@ export class TabLoginPage {
       }
     });
   }
-  
+
   redirectToNewID() {
     window.location.href = 'https://onehealth-dowload.vercel.app';
   }
