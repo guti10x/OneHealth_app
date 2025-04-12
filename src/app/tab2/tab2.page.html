@@ -4,10 +4,15 @@
   <app-header-buenos-dias-noches [isMorning]="formType"></app-header-buenos-dias-noches>
 
   <!-- Formulario -->
-  <app-formulario [formMode]="'defaultForm'"></app-formulario>
+  <app-formulario *ngIf="pendingFormActual" [formMode]="'defaultForm'"></app-formulario>
+  <div *ngIf="!pendingFormActual" class="formulario-completado">
+    <span class="check">✔</span>
+    <p>El formulario ya ha sido rellenado.</p>
+  </div>
+  
 
   <!-- Formulario pendiente de rellenar -->
-  <div class="form-container3" *ngIf="pendingForm">
+  <div class="form-container3" *ngIf="pendingFormPasado">
     <div class="form-pending-row">
       <ion-icon name="warning" class="warning"></ion-icon>
       <p>Tienes un formulario pendiente por completar</p>
