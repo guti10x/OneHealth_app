@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'tab1',  // Redirige a tab1 por defecto
+        redirectTo: 'tab2',  // Redirige a tab2 por defecto
         pathMatch: 'full'
       }
     ]

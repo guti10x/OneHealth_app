@@ -29,4 +29,16 @@ export class UserProfileComponent  implements OnInit {
     link.download = 'privacy-policy.pdf';
     link.click();
   }
+
+  copyUserId() {
+    if (this.userId) {
+      navigator.clipboard.writeText(this.userId).then(() => {
+        console.log('User ID copied to clipboard');
+      }).catch(err => {
+        console.error('Failed to copy User ID: ', err);
+      });
+    } else {
+      console.warn('No User ID to copy');
+    }
+  }
 }
