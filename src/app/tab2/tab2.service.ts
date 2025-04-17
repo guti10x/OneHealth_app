@@ -40,14 +40,14 @@ export class Tab2Service {
         }
 
         const userId = localStorage.getItem('userId');
-
+        
         if (!userId) {
           console.error('No se encontró el userId en el localStorage.');
           resolve(true);
           return;
         }
 
-        console.log("🔍 Buscando formulario ACTUAL entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
+        console.log("Buscando formulario ACTUAL entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
 
         const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin);
         resolve(formularios.length === 0);
@@ -98,7 +98,7 @@ export class Tab2Service {
           return;
         }
 
-        console.log("⏪ Buscando formulario PASADO entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
+        console.log("Buscando formulario PASADO entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
 
         const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin);
         resolve(formularios.length === 0);

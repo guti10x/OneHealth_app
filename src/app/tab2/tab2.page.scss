@@ -79,11 +79,11 @@
 #close_form{
   margin-left: -10px;
   font-size: 20px;
-  color: #f70000;
+  color: #df1010;
 }
 
 .btn-completar {
-  background: #ff0000;
+  background: #df1010;
   color: #fff;
   border: none;
   padding: 8px 14px;
@@ -111,6 +111,7 @@
 .formulario-completado {
   display: flex;
   flex-direction: column;
+  justify-self:center;
   align-items: center;
   gap: 14px;
   background: linear-gradient(135deg, #e0ffe0, #f0fff0);

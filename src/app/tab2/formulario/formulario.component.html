@@ -18,6 +18,51 @@
       <ion-range [(ngModel)]="restLevel" name="restLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ restLevel }}</p>
     </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="wheel-label">Número de horas de uso de pantalla ayer:</ion-label>
+      <div class="custom-wheel-container">
+        <div class="custom-wheel" (scroll)="onScroll($event)">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+            {{ num }}
+          </div>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="wheel-label">Número de desbloqueos de tu teléfono ayer:</ion-label>
+      <div class="custom-wheel-container">
+        <div class="custom-wheel" (scroll)="onScroll($event)">
+          <div *ngFor="let num of numberUnlocks" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+            {{ num }}
+          </div>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="wheel-label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>
+      <div class="custom-wheel-container">
+        <div class="custom-wheel" (scroll)="onScroll($event)">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+            {{ num }}
+          </div>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="wheel-label">Tiempo utilizaste la aplicación de Tiktok ayer:</ion-label>
+      <div class="custom-wheel-container">
+        <div class="custom-wheel" (scroll)="onScroll($event)">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+            {{ num }}
+          </div>
+        </div>
+      </div>
+    </ion-item>
+
   </div>
 
   <div *ngIf="formType === 'formularioNoche'">
@@ -55,7 +100,7 @@
       <ion-label>Nivel medio de energía</ion-label>
       <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
-    </ion-item>
+    </ion-item>    
   </div>
 
   <!-- Error -->

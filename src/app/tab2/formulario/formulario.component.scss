@@ -135,3 +135,99 @@ ion-range {
     color: green;
     font-size: 24px;
 }
+
+.wheel-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    margin-top: 20px;
+  }
+  
+  .custom-wheel-container {
+    height: 120px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .custom-wheel {
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-snap-type: y mandatory;
+  }
+  
+  .custom-wheel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .wheel-option {
+    font-size: 1.2rem;
+    height: 40px;
+    line-height: 40px;
+    scroll-snap-align: center;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wheel-option.selected {
+    color: #007bff;
+    transform: scale(1.15);
+  }
+  
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .app-box {
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    background-color: #b0e0e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .app-box:hover {
+    transform: scale(1.1);
+  }
+  
+  .top-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border: 2px dashed #aaa;
+  }
+  
+  .drop-area {
+    width: 120px;
+    height: 120px;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 2px solid #aaa;
+    margin: 10px;
+  }
+  
+  .drop-area div {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  

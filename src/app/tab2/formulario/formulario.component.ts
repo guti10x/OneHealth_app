@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { PickerController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -217,6 +218,19 @@ export class FormularioComponent implements OnInit {
   // Función para generar un ID del formulario
   private generateUniqueId(): string {
     return Math.random().toString(36).substr(2, 9);
+  }
+
+  numbersHours: number[] = Array.from({ length: 25 }, (_, i) => i);
+  numberUnlocks: number[] = Array.from({ length: 100 }, (_, i) => i);
+
+  selectedHour: number = 0;
+  
+  onScroll(event: any) {
+    const element = event.target;
+    const scrollTop = element.scrollTop;
+    const optionHeight = 40; // igual que tu .wheel-option height
+    const index = Math.round(scrollTop / optionHeight);
+    this.selectedHour = this.numbersHours[index];
   }
 
 }
