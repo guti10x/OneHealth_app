@@ -5,11 +5,16 @@
 
   <!-- Formulario -->
   <app-formulario *ngIf="pendingFormActual" [formMode]="'defaultForm'"></app-formulario>
+
   <div *ngIf="!pendingFormActual" class="formulario-completado">
-    <span class="check">✔</span>
-    <p>El formulario ya ha sido rellenado.</p>
+    <span class="emoji">😊</span>
+    <div class="mensaje">
+      <span class="check">✔</span>
+      <p *ngIf="!pendingFormPasado">No hay formularios pendientes por rellenar.</p>
+      <p *ngIf="pendingFormPasado">El formulario ya ha sido rellenado.</p>
+    </div>
   </div>
-  
+ 
 
   <!-- Formulario pendiente de rellenar -->
   <div class="form-container3" *ngIf="pendingFormPasado">

@@ -155,11 +155,39 @@ export class FormularioComponent implements OnInit {
     if (this.validateForm()) {
       // Si el formulario es válido, continúa con el envío
       const userId = localStorage.getItem('userId');
+      
+      const now = new Date();
+      const currentHour = now.getHours();
+
+      let recordedAt: Date;
+
+      if (this.formMode === 'PendingForm') {
+        if (currentHour >= 6 && currentHour < 18) {
+          // Hoy a las 5:55 AM
+          recordedAt = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            5, 55, 0
+          );
+        } else {
+          // Hoy a las 17:50
+          recordedAt = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            17, 50, 0
+          );
+        }
+      } else {
+        recordedAt = now;
+      }
+
       const datosFormulario: any = {
         id_user: userId,
-        recorded_at: new Date()
+        recorded_at: recordedAt
       };
-  
+
       // Agregar los campos al formulario si no son nulos
       if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
       if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;

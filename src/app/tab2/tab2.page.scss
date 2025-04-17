@@ -110,19 +110,47 @@
 
 .formulario-completado {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: #e0ffe0;
-  border: 1px solid #a5d6a7;
-  border-radius: 10px;
-  padding: 12px 20px;
-  color: #2e7d32;
-  font-weight: 500;
-  margin: 20px;
-  font-size: 16px;
+  gap: 14px;
+  background: linear-gradient(135deg, #e0ffe0, #f0fff0);
+  border: 2px solid #81c784;
+  border-radius: 12px;
+  padding: 16px 24px;
+  color: #1b5e20;
+  font-weight: 600;
+  margin: 20px auto;
+  font-size: 17px;
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.15);
+  max-width: 600px;
+  text-align: center;
+  margin: 10px;
+}
+
+.emoji {
+  font-size: 32px;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.mensaje {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .check {
-  font-size: 20px;
+  font-size: 24px;
+}
+
+.mensaje p {
+  margin: 0;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
