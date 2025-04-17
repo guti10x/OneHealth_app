@@ -21,8 +21,9 @@ export class AppComponent implements OnInit{
   private plataform: Platform = inject(Platform); 
   private firestoreService: FirebaseService = inject(FirebaseService);
 
-  
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {
+    this.detectDarkMode();
+  }
 
   storedId = localStorage.getItem('userId');
 
@@ -50,5 +51,20 @@ export class AppComponent implements OnInit{
       console.log('No hay ID almacenado, redirigiendo a /tab-login');
       this.router.navigate(['/tab-login']);
     }
+  }
+
+  detectDarkMode() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    this.toggleDarkTheme(prefersDark.matches); // aplicar al inicio
+
+    // escuchar cambios en el sistema
+    prefersDark.addEventListener('change', (mediaQuery) => {
+      this.toggleDarkTheme(mediaQuery.matches);
+    });
+  }
+
+  toggleDarkTheme(shouldAdd: boolean) {
+    document.body.classList.toggle('dark', shouldAdd);
   }
 }
