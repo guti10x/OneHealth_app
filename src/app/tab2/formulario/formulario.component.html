@@ -63,6 +63,16 @@
       </div>
     </ion-item>
 
+    <div class="app-usage-ranking">
+      <h3 class="ranking-title">Top aplicaciones mas usadas</h3>
+      <p> Ordena las siguientes apps en función del  uso que has hecho de cada una (de mayor a menor uso)</p>
+      <div cdkDropList [cdkDropListData]="topApps" class="ranking-list" (cdkDropListDropped)="drop($event)">
+        <div class="ranking-item" *ngFor="let app of topApps; let i = index" cdkDrag>
+          <span class="ranking-number">{{ i + 1 }}.</span>
+          <span class="app-name">{{ app }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="formType === 'formularioNoche'">

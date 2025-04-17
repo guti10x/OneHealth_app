@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PickerController } from '@ionic/angular';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,7 @@ import { FirebaseService } from 'src/services/firebase.service';
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss'],
-  imports: [IonicModule, FormsModule, CommonModule]
+  imports: [IonicModule, FormsModule, CommonModule, DragDropModule]
 })
 
 export class FormularioComponent implements OnInit {
@@ -56,9 +57,9 @@ export class FormularioComponent implements OnInit {
     const currentHour = new Date().getHours();
     
     if(this.formMode === 'defaultForm') {
-      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioMañana' : 'formularioNoche';
+      this.formType = currentHour >= 6 && currentHour-2 < 18 ? 'formularioMañana' : 'formularioNoche';
     } else if (this.formMode === 'PendingForm') {
-      this.formType = currentHour >= 6 && currentHour < 18 ? 'formularioNoche' : 'formularioMañana';
+      this.formType = currentHour >= 6 && currentHour-2 < 18 ? 'formularioNoche' : 'formularioMañana';
     } 
 
     console.log('Tipo de formulario:', this.formType);
@@ -233,4 +234,9 @@ export class FormularioComponent implements OnInit {
     this.selectedHour = this.numbersHours[index];
   }
 
+  topApps = ['Instagram', 'WhatsApp', 'TikTok', 'YouTube'];
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.topApps, event.previousIndex, event.currentIndex);
+  }
 }
