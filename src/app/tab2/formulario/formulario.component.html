@@ -22,46 +22,46 @@
     <ion-item lines="none">
       <ion-label class="wheel-label">Número de horas de uso de pantalla ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event)">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+        <div class="custom-wheel" (scroll)="onScroll($event, 'screenTime')">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === screenTime}">
             {{ num }}
           </div>
         </div>
       </div>
     </ion-item>
-
+    
     <ion-item lines="none">
       <ion-label class="wheel-label">Número de desbloqueos de tu teléfono ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event)">
-          <div *ngFor="let num of numberUnlocks" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+        <div class="custom-wheel" (scroll)="onScroll($event, 'unlocks')">
+          <div *ngFor="let num of numberUnlocks" class="wheel-option" [ngClass]="{'selected': num === unlocks}">
             {{ num }}
           </div>
         </div>
       </div>
     </ion-item>
-
+    
     <ion-item lines="none">
       <ion-label class="wheel-label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event)">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+        <div class="custom-wheel" (scroll)="onScroll($event, 'instagramTime')">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === instagramTime}">
             {{ num }}
           </div>
         </div>
       </div>
     </ion-item>
-
+    
     <ion-item lines="none">
       <ion-label class="wheel-label">Tiempo utilizaste la aplicación de Tiktok ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event)">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === selectedHour}">
+        <div class="custom-wheel" (scroll)="onScroll($event, 'tiktokTime')">
+          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === tiktokTime}">
             {{ num }}
           </div>
         </div>
       </div>
-    </ion-item>
+    </ion-item>    
 
     <div class="app-usage-ranking">
       <h3 class="ranking-title">Top aplicaciones mas usadas</h3>

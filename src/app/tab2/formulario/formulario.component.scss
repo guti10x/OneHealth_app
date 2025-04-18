@@ -306,3 +306,15 @@ ion-range {
   opacity: 0.7;
   transition: opacity 0.3s ease;
 }
+
+hint-scroll {
+  animation: scrollHint 2s ease-in-out 1;
+}
+
+@keyframes scrollHint {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-10px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}

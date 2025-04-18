@@ -37,6 +37,11 @@ export class FormularioComponent implements OnInit {
   wakeUpTime: Date | null = null;
   sleepTime: Date | null = null;
   restLevel: number | null = null;
+  screenTime: number | null = null;
+  unlocks: number | null = null;
+  instagramTime: number | null = null;
+  tiktokTime: number | null = null;
+  finalRanking: string[] = [];
 
   // Formulario 2
   timestamp: Date | null = null;
@@ -57,9 +62,9 @@ export class FormularioComponent implements OnInit {
     const currentHour = new Date().getHours();
     
     if(this.formMode === 'defaultForm') {
-      this.formType = currentHour >= 6 && currentHour-2 < 18 ? 'formularioMañana' : 'formularioNoche';
+      this.formType = currentHour >= 6 && currentHour-10 < 18 ? 'formularioMañana' : 'formularioNoche';
     } else if (this.formMode === 'PendingForm') {
-      this.formType = currentHour >= 6 && currentHour-2 < 18 ? 'formularioNoche' : 'formularioMañana';
+      this.formType = currentHour >= 6 && currentHour-10 < 18 ? 'formularioNoche' : 'formularioMañana';
     } 
 
     console.log('Tipo de formulario:', this.formType);
@@ -194,6 +199,11 @@ export class FormularioComponent implements OnInit {
       if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
       if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
       if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;
+      if (this.screenTime !== null) datosFormulario.screen_time = this.screenTime;
+      if (this.unlocks !== null) datosFormulario.unlocks = this.unlocks;
+      if (this.instagramTime !== null) datosFormulario.instagram_time = this.instagramTime;
+      if (this.tiktokTime !== null) datosFormulario.tiktok_time = this.tiktokTime;
+      if (this.finalRanking.length > 0) datosFormulario.final_ranking = this.finalRanking.join(',');
       if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
       if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
       if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
@@ -226,17 +236,28 @@ export class FormularioComponent implements OnInit {
 
   selectedHour: number = 0;
   
-  onScroll(event: any) {
-    const element = event.target;
-    const scrollTop = element.scrollTop;
-    const optionHeight = 40; // igual que tu .wheel-option height
-    const index = Math.round(scrollTop / optionHeight);
-    this.selectedHour = this.numbersHours[index];
+  onScroll(event: any, type: string) {
+    const scrollTop = event.target.scrollTop;
+    const itemHeight = 40; // ajusta esto al alto de tus .wheel-option
+  
+    const selectedIndex = Math.round(scrollTop / itemHeight);
+  
+    let value = 0;
+    if (type === 'screenTime' || type === 'instagramTime' || type === 'tiktokTime') {
+      value = this.numbersHours[selectedIndex] || 0;
+    } else if (type === 'unlocks') {
+      value = this.numberUnlocks[selectedIndex] || 0;
+    }
+  
+    (this as any)[type] = value;
   }
 
   topApps = ['Instagram', 'WhatsApp', 'TikTok', 'YouTube'];
-
+  
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.topApps, event.previousIndex, event.currentIndex);
+    this.finalRanking = [...this.topApps]; // copia actualizada del top
+    console.log('Ranking actualizado dinámicamente:', this.finalRanking);
   }
+  
 }
