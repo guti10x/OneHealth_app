@@ -23,34 +23,41 @@ export class FirebaseService {
   // ------------ Datos de sueño --------------------------------- //
 
    // Función para verificar si existe un formulario en un rango de fechas
-   async obtenerFormularios(fechaInicio: number, fechaFin: number): Promise<any[]> {
-    // Convertir las fechas a Timestamp de Firebase (en UTC)
+   async obtenerFormularios(fechaInicio: number, fechaFin: number, idUser: string): Promise<any[]> {
+    // Convertir las fechas a Timestamp de Firebase en UTC
     const fechaInicioTimestamp = Timestamp.fromMillis(fechaInicio);
     const fechaFinTimestamp = Timestamp.fromMillis(fechaFin);
   
-    console.log('Obteniendo formularios entre', fechaInicioTimestamp.toDate().toUTCString(), 'y', fechaFinTimestamp.toDate().toUTCString());
-    
-    // Crear la consulta para obtener formularios entre fechaInicio y fechaFin
+    console.log(
+      'Obteniendo formularios entre',
+      fechaInicioTimestamp.toDate().toUTCString(),
+      'y',
+      fechaFinTimestamp.toDate().toUTCString(),
+      'para el usuario',
+      idUser
+    );
+  
+    // Referencia a la colección y consulta
     const collectionRef = collection(this.firestore, 'formularios');
     const q = query(
       collectionRef,
       where('recorded_at', '>=', fechaInicioTimestamp),
-      where('recorded_at', '<=', fechaFinTimestamp)
+      where('recorded_at', '<=', fechaFinTimestamp),
+      where('id_user', '==', idUser)
     );
-    
+  
     const querySnapshot = await getDocs(q);
   
-    // Mapeamos los resultados
+    // Mapeamos los documentos encontrados
     const formularios = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
-    
+  
     console.log('Formularios obtenidos:', formularios);
-    
     return formularios;
   }
-
+ 
   // Obtener el último registro recogido de datos del sueño por un formulario asociado a un id
   obtenerFormularioMasReciente(id: string): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');

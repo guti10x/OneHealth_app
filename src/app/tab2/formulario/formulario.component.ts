@@ -231,13 +231,12 @@ export class FormularioComponent implements OnInit {
 
       const datosFormulario: any = {
         id_user: userId,
-        city: this.city,
-        state: this.state,
-        country: this.country,
-        recorded_at: recordedAt
       };
 
       // Agregar los campos al formulario si no son nulos
+      if (this.city) datosFormulario.city = this.city;
+      if (this.state) datosFormulario.state = this.state;
+      if (this.country) datosFormulario.country = this.country;
       if (this.restLevel !== null) datosFormulario.rest_level = this.restLevel;
       if (this.sleepTime !== null && !isNaN(this.sleepTime.getTime())) datosFormulario.sleep_time = this.sleepTime;
       if (this.wakeUpTime !== null && !isNaN(this.wakeUpTime.getTime())) datosFormulario.wake_up_time = this.wakeUpTime;

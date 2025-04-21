@@ -49,7 +49,7 @@ export class Tab2Service {
 
         console.log("Buscando formulario ACTUAL entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
 
-        const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin);
+        const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin, userId);
         resolve(formularios.length === 0);
 
       } catch (error) {
@@ -100,7 +100,7 @@ export class Tab2Service {
 
         console.log("Buscando formulario PASADO entre:", new Date(fechaInicio).toUTCString(), "y", new Date(fechaFin).toUTCString());
 
-        const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin);
+        const formularios = await this.firebaseService.obtenerFormularios(fechaInicio, fechaFin, userId);
         resolve(formularios.length === 0);
 
       } catch (error) {
