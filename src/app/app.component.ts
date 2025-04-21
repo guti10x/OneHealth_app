@@ -8,6 +8,7 @@ import { NotificationService } from '../services/notification.service';
 import { initializeApp } from "firebase/app";
 import { FirebaseService } from '../services/firebase.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
