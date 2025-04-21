@@ -19,7 +19,7 @@ export class FirebaseService {
   }
 
   // ----------------- GETS ----------------------------------------------------------- // 
-  
+    
   // ------------ Datos de sueño --------------------------------- //
 
    // Función para verificar si existe un formulario en un rango de fechas
@@ -28,14 +28,7 @@ export class FirebaseService {
     const fechaInicioTimestamp = Timestamp.fromMillis(fechaInicio);
     const fechaFinTimestamp = Timestamp.fromMillis(fechaFin);
   
-    console.log(
-      'Obteniendo formularios entre',
-      fechaInicioTimestamp.toDate().toUTCString(),
-      'y',
-      fechaFinTimestamp.toDate().toUTCString(),
-      'para el usuario',
-      idUser
-    );
+    // console.log('Obteniendo formularios entre', fechaInicioTimestamp.toDate().toUTCString(), 'y', fechaFinTimestamp.toDate().toUTCString(), 'para el usuario', idUser);
   
     // Referencia a la colección y consulta
     const collectionRef = collection(this.firestore, 'formularios');
@@ -54,7 +47,7 @@ export class FirebaseService {
       ...doc.data()
     }));
   
-    console.log('Formularios obtenidos:', formularios);
+    //console.log('Formularios obtenidos:', formularios);
     return formularios;
   }
  
@@ -70,7 +63,7 @@ export class FirebaseService {
   
     return getDocs(q).then(snapshot => {
       if (snapshot.empty) {
-        console.log("No se encontraron formularios.");
+        console.log("No se encontraron formulariosvv.");
         return null;
       }
   

@@ -47,7 +47,7 @@ export class FormularioComponent implements OnInit {
   unlocks: number | null = null;
   instagramTime: number | null = null;
   tiktokTime: number | null = null;
-  finalRanking: string[] = [];
+  topApps= ['Instagram', 'WhatsApp', 'TikTok', 'YouTube'];
 
   // Formulario 2
   timestamp: Date | null = null;
@@ -101,9 +101,9 @@ export class FormularioComponent implements OnInit {
     const currentHour = new Date().getHours();
     
     if(this.formMode === 'defaultForm') {
-      this.formType = currentHour >= 6 && currentHour-10 < 18 ? 'formularioMañana' : 'formularioNoche';
+      this.formType = currentHour >= 6 && currentHour < 19 ? 'formularioMañana' : 'formularioNoche';
     } else if (this.formMode === 'PendingForm') {
-      this.formType = currentHour >= 6 && currentHour-10 < 18 ? 'formularioNoche' : 'formularioMañana';
+      this.formType = currentHour >= 6 && currentHour < 19 ? 'formularioNoche' : 'formularioMañana';
     } 
 
     console.log('Tipo de formulario:', this.formType);
@@ -231,6 +231,7 @@ export class FormularioComponent implements OnInit {
 
       const datosFormulario: any = {
         id_user: userId,
+        recorded_at: recordedAt,
       };
 
       // Agregar los campos al formulario si no son nulos
@@ -244,7 +245,7 @@ export class FormularioComponent implements OnInit {
       if (this.unlocks !== null) datosFormulario.unlocks = this.unlocks;
       if (this.instagramTime !== null) datosFormulario.instagram_time = this.instagramTime;
       if (this.tiktokTime !== null) datosFormulario.tiktok_time = this.tiktokTime;
-      if (this.finalRanking.length > 0) datosFormulario.final_ranking = this.finalRanking.join(',');
+      if (this.topApps.length > 0) datosFormulario.final_ranking = this.topApps.join(',');
       if (this.avgAnxietyLevel !== null) datosFormulario.avgAnxietyLevel = this.avgAnxietyLevel;
       if (this.maxAnxietyLevel !== null) datosFormulario.maxAnxietyLevel = this.maxAnxietyLevel;
       if (this.sadnessLevel !== null) datosFormulario.sadnessLevel = this.sadnessLevel;
@@ -293,12 +294,8 @@ export class FormularioComponent implements OnInit {
     (this as any)[type] = value;
   }
 
-  topApps = ['Instagram', 'WhatsApp', 'TikTok', 'YouTube'];
-  
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.topApps, event.previousIndex, event.currentIndex);
-    this.finalRanking = [...this.topApps]; // copia actualizada del top
-    console.log('Ranking actualizado dinámicamente:', this.finalRanking);
+    console.log('Nuevo orden:', this.topApps);
   }
-  
 }

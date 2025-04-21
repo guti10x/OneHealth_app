@@ -43,7 +43,7 @@ export class Tab2Page {
   // Método para establecer el tipo de formulario según la hora actual
   setFormTypeTime() {
     const currentHour = new Date().getHours();
-    this.formType = currentHour >= 6 && currentHour < 17 ? 'formularioMañana' : 'formularioNoche';
+    this.formType = currentHour >= 6 && currentHour < 19 ? 'formularioMañana' : 'formularioNoche';
   }
 
   // Método para mostrar/ocultar formulario pendiente

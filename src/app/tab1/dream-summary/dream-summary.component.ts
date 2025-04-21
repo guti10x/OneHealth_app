@@ -33,7 +33,6 @@ export class DreamSummaryComponent  implements OnInit {
   // Función para obtener los datos de sueño
   loadSleepData() {
     const userId = localStorage.getItem('userId');
-    //const userId = "xk0vkwrik";
     
     console.log(userId);
     if (!userId) {
@@ -42,6 +41,7 @@ export class DreamSummaryComponent  implements OnInit {
     }
   
     this.firebaseService.obtenerFormularioMasReciente(userId).then(data => {
+      console.log("Datos de sueño:", data, userId);
       if (!data) {
         console.error('No sleep data found for user');
         return;

@@ -3,18 +3,17 @@
   
   <app-header-buenos-dias-noches [isMorning]="formType"></app-header-buenos-dias-noches>
 
-  <!-- Formulario -->
-  <app-formulario *ngIf="pendingFormActual" [formMode]="'defaultForm'"></app-formulario>
 
-  <div *ngIf="!pendingFormActual" class="formulario-completado">
+  <div *ngIf="!pendingFormActual && !pendingFormPasado" class="formulario-completado">
     <span class="emoji">😊</span>
     <div class="mensaje">
       <span class="check">✔</span>
-      <p *ngIf="!pendingFormPasado">No hay formularios pendientes por rellenar.</p>
-      <p *ngIf="pendingFormPasado">El formulario ya ha sido rellenado.</p>
+      <p>No hay formularios pendientes por rellenar.</p>
     </div>
   </div>
- 
+
+  <!-- Formulario -->
+  <app-formulario *ngIf="pendingFormActual" [formMode]="'defaultForm'"></app-formulario>
 
   <!-- Formulario pendiente de rellenar -->
   <div class="form-container3" *ngIf="pendingFormPasado">

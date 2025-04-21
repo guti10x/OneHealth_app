@@ -3,14 +3,15 @@
   <p *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
 
   <div *ngIf="formType === 'formularioMañana'">
-    <ion-item button (click)="openTimePicker('wakeUpTime')" [ngClass]="{'error-border': formSubmitted && !wakeUpTime}">
-      <ion-label>Hora y día a la que te has despertado:</ion-label>
-      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
-    </ion-item>
 
     <ion-item button (click)="openTimePicker('sleepTime')" [ngClass]="{'error-border': formSubmitted && !sleepTime}">
       <ion-label>Hora y día a la que te has acostado:</ion-label>
       <ion-text>{{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
+    </ion-item>
+    
+    <ion-item button (click)="openTimePicker('wakeUpTime')" [ngClass]="{'error-border': formSubmitted && !wakeUpTime}">
+      <ion-label>Hora y día a la que te has despertado:</ion-label>
+      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
     </ion-item>
 
     <ion-item [ngClass]="{'error-border': formSubmitted && restLevel === null}">
