@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 // Importamos el servicio de Firebase
 import { FirebaseService } from 'src/services/firebase.service';
 
+import { GeolocationService } from '../../../services/geolocation.service';
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -17,8 +19,12 @@ import { FirebaseService } from 'src/services/firebase.service';
 })
 
 export class FormularioComponent implements OnInit {
-
-  constructor(private pickerCtrl: PickerController, private firebaseService: FirebaseService) {}
+  position: any;
+  city: string | undefined;
+  state: string | undefined;
+  country: string | undefined;
+  
+  constructor(private pickerCtrl: PickerController,private firebaseService: FirebaseService,private geolocationService: GeolocationService) {}
 
   // Tipo formulario
   formType: string = 'formulario'; // formularioNoche | formularioMañana
@@ -55,6 +61,39 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
     // Llamar a la función para saber si el formulario corresponde al de día o de noche
     this.setFormTypeTime();
+    this.getCurrentPosition();
+  }
+
+  //Método para obtener la geolocalizacion
+  async getCurrentPosition() {
+    try {
+      this.position = await this.geolocationService.getCurrentPosition();
+      console.log('Posición actual:', this.position);
+      this.getGeocodeData(this.position.coords.latitude,this.position.coords.longitude);
+    } catch (error) {
+      console.error('Error al obtener la posición: ', error);
+    }
+  }
+
+  getGeocodeData(lat: number, lng: number) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status !== 'error') {
+                this.city = data.address.city;
+                this.state = data.address.state;
+                this.country = data.address.country;
+
+                console.log(`Ciudad: ${this.city}, Comunidad: ${this.state}, País: ${this.country}`);
+            } else {
+                console.error('Error al obtener los datos de geocodificación:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
   }
 
   // Método para definir si es de día o noche 
@@ -192,6 +231,9 @@ export class FormularioComponent implements OnInit {
 
       const datosFormulario: any = {
         id_user: userId,
+        city: this.city,
+        state: this.state,
+        country: this.country,
         recorded_at: recordedAt
       };
 
