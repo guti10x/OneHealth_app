@@ -24,7 +24,7 @@ ion-label {
   font-size: 14px;
   font-weight: 500;
   color: #333;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 ion-text {
@@ -136,17 +136,20 @@ ion-range {
   font-size: 24px;
 }
 
+//////////////////////////////////////
+
 .custom-wheel-container {
-  height: 80px; /* antes 120px */
+  height: 65px; 
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: #f2f3f5;
+  border-radius: 40px;
 }
 
 .custom-wheel {
-  margin-top: 15px;
   margin-left: 10px;
   height: 65%;
   overflow-y: scroll;
@@ -157,6 +160,8 @@ ion-range {
   flex-direction: column;
   align-items: center;
   scroll-snap-type: y mandatory;
+  //background-color: #f8d7da;
+  margin-right: 9px;
 }
 
 .wheel-option {
@@ -167,6 +172,8 @@ ion-range {
   color: #999;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .wheel-option.selected {
@@ -174,6 +181,7 @@ ion-range {
   transform: scale(1.15);
 }
 
+///////////////////////////////////////////////////
 
 .container {
   display: flex;

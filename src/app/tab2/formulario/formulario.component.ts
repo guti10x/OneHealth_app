@@ -280,7 +280,7 @@ export class FormularioComponent implements OnInit {
   
   onScroll(event: any, type: string) {
     const scrollTop = event.target.scrollTop;
-    const itemHeight = 40; // ajusta esto al alto de tus .wheel-option
+    const itemHeight = 40;
   
     const selectedIndex = Math.round(scrollTop / itemHeight);
   

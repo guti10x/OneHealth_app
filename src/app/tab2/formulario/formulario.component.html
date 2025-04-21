@@ -8,7 +8,7 @@
       <ion-label>Hora y día a la que te has acostado:</ion-label>
       <ion-text>{{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
     </ion-item>
-    
+
     <ion-item button (click)="openTimePicker('wakeUpTime')" [ngClass]="{'error-border': formSubmitted && !wakeUpTime}">
       <ion-label>Hora y día a la que te has despertado:</ion-label>
       <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
@@ -20,53 +20,61 @@
       <p class="value-display">{{ restLevel }}</p>
     </ion-item>
 
-    <ion-item lines="none">
+    <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !screenTime}">
       <ion-label class="wheel-label">Número de horas de uso de pantalla ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event, 'screenTime')">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === screenTime}">
-            {{ num }}
-          </div>
+      <div class="custom-wheel" 
+         [ngStyle]="{'margin-top': (screenTime === null || screenTime === 0) ? '15px' : '0'}" 
+         (scroll)="onScroll($event, 'screenTime')">
+        <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === screenTime}">
+        {{ num }}
         </div>
       </div>
+      </div>
     </ion-item>
-    
-    <ion-item lines="none">
+
+    <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !unlocks}">
       <ion-label class="wheel-label">Número de desbloqueos de tu teléfono ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event, 'unlocks')">
-          <div *ngFor="let num of numberUnlocks" class="wheel-option" [ngClass]="{'selected': num === unlocks}">
-            {{ num }}
-          </div>
+      <div class="custom-wheel" 
+         [ngStyle]="{'margin-top': (unlocks === null || unlocks === 0) ? '15px' : '0'}" 
+         (scroll)="onScroll($event, 'unlocks')">
+        <div *ngFor="let num of numberUnlocks" class="wheel-option" [ngClass]="{'selected': num === unlocks}">
+        {{ num }}
         </div>
       </div>
+      </div>
     </ion-item>
-    
-    <ion-item lines="none">
+
+    <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !instagramTime}">
       <ion-label class="wheel-label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event, 'instagramTime')">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === instagramTime}">
-            {{ num }}
-          </div>
+      <div class="custom-wheel" 
+         [ngStyle]="{'margin-top': (instagramTime === null || instagramTime === 0) ? '15px' : '0'}" 
+         (scroll)="onScroll($event, 'instagramTime')">
+        <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === instagramTime}">
+        {{ num }}
         </div>
+      </div>
       </div>
     </ion-item>
-    
-    <ion-item lines="none">
+
+    <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !tiktokTime}">
       <ion-label class="wheel-label">Tiempo utilizaste la aplicación de Tiktok ayer:</ion-label>
       <div class="custom-wheel-container">
-        <div class="custom-wheel" (scroll)="onScroll($event, 'tiktokTime')">
-          <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === tiktokTime}">
-            {{ num }}
-          </div>
+      <div class="custom-wheel" 
+         [ngStyle]="{'margin-top': (tiktokTime === null || tiktokTime === 0) ? '15px' : '0'}" 
+         (scroll)="onScroll($event, 'tiktokTime')">
+        <div *ngFor="let num of numbersHours" class="wheel-option" [ngClass]="{'selected': num === tiktokTime}">
+        {{ num }}
         </div>
       </div>
-    </ion-item>    
+      </div>
+    </ion-item>
 
     <div class="app-usage-ranking">
       <h3 class="ranking-title">Top aplicaciones mas usadas</h3>
-      <p> Ordena las siguientes apps en función del  uso que has hecho de cada una (de mayor a menor uso)</p>
+      <p> Ordena las siguientes apps en función del uso que has hecho de cada una (de mayor a menor uso)</p>
       <div cdkDropList [cdkDropListData]="topApps" class="ranking-list" (cdkDropListDropped)="drop($event)">
         <div class="ranking-item" *ngFor="let app of topApps; let i = index" cdkDrag>
           <span class="ranking-number">{{ i + 1 }}.</span>
@@ -79,13 +87,15 @@
   <div *ngIf="formType === 'formularioNoche'">
     <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
       <ion-label>Nivel medio de ansiedad</ion-label>
-      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1"
+        snaps="true"></ion-range>
       <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
     </ion-item>
 
     <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
       <ion-label>Máximo nivel de ansiedad</ion-label>
-      <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
+      <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1"
+        snaps="true"></ion-range>
       <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
     </ion-item>
 
@@ -111,7 +121,7 @@
       <ion-label>Nivel medio de energía</ion-label>
       <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
-    </ion-item>    
+    </ion-item>
   </div>
 
   <!-- Error -->
