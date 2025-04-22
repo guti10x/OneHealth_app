@@ -3,18 +3,26 @@
 
   <app-header-daswahere></app-header-daswahere>
 
+  <div class="no-data-box" *ngIf="!dataAvailable">
+    <ion-icon name="information-circle-outline" class="no-data-icon"></ion-icon>
+    <p>
+      <strong>No hay datos para mostrar.</strong><br><br><s></s>
+      Completa los formularios y permite la recopilación de datos de tu dispositivo y wereables, para poder visionarlos aquí.
+    </p>
+  </div>
+  
   <!-- Avisos / Recomendacciones -->
   <!-- Mostrar avisos de datos anormales que se detectan -->  <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
-  <app-carousel-dash></app-carousel-dash>
+  <app-carousel-dash *ngIf="dataAvailable"></app-carousel-dash>
 
   <!-- Datos de sueño -->
-  <app-dream-summary></app-dream-summary>
+  <app-dream-summary *ngIf="dataAvailable"></app-dream-summary>
 
   <!-- Datos de uso del móvil -->
-  <app-mobile-usage-stats></app-mobile-usage-stats>
+  <app-mobile-usage-stats *ngIf="dataAvailable"></app-mobile-usage-stats>
 
   <!-- Gráficas de ansiedad y estrés -->
-  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" *ngIf="carrusel_components_visibles">
+  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" *ngIf="carrusel_components_visibles && dataAvailable">
     <!-- Flecha de retroceso usando Ion Icon -->
     <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
 
@@ -28,11 +36,11 @@
     <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
   </div>
   <!-- Indicadores carrusel de gráficas -->
-  <div class="indicators" *ngIf="carrusel_components_visibles">
+  <div class="indicators" *ngIf="carrusel_components_visibles && dataAvailable">
     <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
   </div>
 
   <!-- Datos Biométricos -->
-  <app-biometric-data-sumary></app-biometric-data-sumary>
+  <app-biometric-data-sumary *ngIf="dataAvailable"></app-biometric-data-sumary>
 
 </ion-content>

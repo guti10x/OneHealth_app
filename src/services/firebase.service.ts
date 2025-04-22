@@ -12,7 +12,7 @@ export class FirebaseService {
   init(){}
  
   // -------------------------- FORMULARIOS ----------------------------------------------------------- // 
-  // Formularios (mañana y noche
+  // Formularios (mañana y noche)
   guardarFormulario(data: any): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
     return addDoc(collectionRef, data);

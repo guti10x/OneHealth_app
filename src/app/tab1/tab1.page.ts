@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { FirebaseService } from 'src/services/firebase.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,7 +10,9 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  constructor(private firebaseService: FirebaseService) {}
+
+  dataAvailable: boolean = false;
 
   ///////// CARRUSEL DE GRÁFICAS ////////////////////////////////////
 
@@ -18,6 +22,16 @@ export class Tab1Page {
   touchEndX = 0;
   // Variable para mostrar componentes carrusel de gráficas
   carrusel_components_visibles: boolean = false;
+
+  ngOnInit() {
+    this.firebaseService.obtenerFormularioMasReciente(localStorage.getItem('userId') || '').then((data) => {
+      if (data) {
+        this.dataAvailable = true;
+      } else {
+        this.dataAvailable = false;
+      }
+    });
+  }
 
   // Al tocar la pantalla, guardamos la posición inicial
   onTouchStart(event: TouchEvent) {
