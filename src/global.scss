@@ -41,5 +41,10 @@ body.dark {
     --ion-background-color: #eeeeee;
     --ion-text-color: #000000;
     --ion-label-color: #000000;
-    // puedes redefinir más variables de Ionic aquí
+
+      // Color del fondo de la barra de pestañas (claro)
+  --ion-tab-bar-background: #ffffff; 
+
+  // Color de los íconos y textos de los botones de las pestañas (oscuro)
+  --ion-tab-button-color: #000000;
   }
