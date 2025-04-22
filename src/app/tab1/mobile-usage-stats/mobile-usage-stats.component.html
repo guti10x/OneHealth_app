@@ -10,13 +10,13 @@
   <ion-card-content>
     <!-- Parte superior: Tiempo total del día -->
     <div class="stat-box">
-      <h2 class="section-title">Tiempo Total del Día</h2>
+      <h2 class="section-title">Tiempo de uso del móvil</h2>
       <div class="time-info">
         <div class="time-container">
           <ion-icon name="timer" class="time-icon"></ion-icon>
           <p class="time-value">{{ totalUsageTime }}</p>
         </div>
-        <div class="change-info">
+        <div class="change-info" *ngIf="usageChange !== null">
           <p *ngIf="usageChange > 0" class="usage-change positive">+{{ usageChange }} minutos respecto ayer</p>
           <p *ngIf="usageChange < 0" class="usage-change negative">{{ usageChange }} minutos respecto ayer</p>
           <p *ngIf="usageChange === 0" class="usage-change neutral">Sin cambios</p>
@@ -25,16 +25,17 @@
     </div>
 
     <!-- Parte inferior: Top 3 apps más usadas -->
-    <div class="stat-box">
+    <div class="stat-box" *ngIf="dataAvailable">
       <h3 class="section-title">Top 3 Apps Más Usadas</h3>
       <div class="apps-row">
-        <div *ngFor="let app of topApps" class="app-container">
-          <ion-icon [name]="app.icon" class="app-icon"></ion-icon>
-          <div class="app-info">
-            <p class="app-name">{{ app.name }}</p>
-            <p class="app-time">{{ app.timeUsed }}</p>
-          </div>
+      <div *ngFor="let app of topApps; let i = index" class="app-container">
+        <ion-icon [name]="app.icon" class="app-icon"></ion-icon>
+        <div class="app-info">
+        <p class="app-name">{{ app.name }}</p>
+        <p class="app-time">{{ app.usageTime }}</p>
+        <p class="app-rank">Top {{ i + 1 }}</p>
         </div>
+      </div>
       </div>
     </div>
 

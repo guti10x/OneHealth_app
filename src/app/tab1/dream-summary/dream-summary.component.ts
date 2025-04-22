@@ -24,14 +24,14 @@ export class DreamSummaryComponent  implements OnInit {
   dataAvailable: boolean = true;
 
   ngOnInit() {
-    this.loadSleepData();
+    this.loadFormData();
 
-    this.calcularHorasSuenoAyer("xk0vkwrik");
+    this.calcularHorasSuenoAyer("xk0vkwrik");    // pendingggggggggggggggggggggggggggggggggggggggggg
   }
 
   ////////////////////// OBTENER DATOS ////////////////////////////////////////////
   // Función para obtener los datos de sueño
-  loadSleepData() {
+  loadFormData() {
     const userId = localStorage.getItem('userId');
     
     console.log(userId);
@@ -44,6 +44,8 @@ export class DreamSummaryComponent  implements OnInit {
       console.log("Datos de sueño:", data, userId);
       if (!data) {
         console.error('No sleep data found for user');
+        this.dataAvailable = false;
+
         return;
       }
 
@@ -61,7 +63,9 @@ export class DreamSummaryComponent  implements OnInit {
       this.timeSlept = this.calculateSleepDuration(data.sleep_time, data.wake_up_time);
 
       // Diferencia de tiempo de sueño respecto
-
+      
+      // Si hay datos, mostrar el componente
+      this.dataAvailable = true; 
     }).catch(error => {
       console.error('Error fetching sleep data:', error);
     });
