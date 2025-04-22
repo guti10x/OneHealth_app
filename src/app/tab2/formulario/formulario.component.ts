@@ -39,6 +39,9 @@ export class FormularioComponent implements OnInit {
   // Input inicializado
   formSubmitted: boolean = false;
 
+  // Variable para mostrar el mensaje de información
+  showInfoMessage = true;
+
   // Formulario 1
   wakeUpTime: Date | null = null;
   sleepTime: Date | null = null;

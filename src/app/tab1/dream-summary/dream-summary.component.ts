@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router'
+import { filter } from 'rxjs/operators';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from 'src/services/firebase.service';
@@ -12,7 +14,7 @@ import { FirebaseService } from 'src/services/firebase.service';
 
 export class DreamSummaryComponent  implements OnInit {
 
-  constructor(private firebaseService : FirebaseService) { }
+  constructor(private firebaseService : FirebaseService, private router: Router) { }
 
   sleep_time: Date | null = null; formattedSleepTime: string = '';
   wake_up_time: Date | null = null; formattedWakeUpTime: string = '';
@@ -25,6 +27,14 @@ export class DreamSummaryComponent  implements OnInit {
 
   ngOnInit() {
     this.loadFormData();
+
+    // Recargar datos del componte al ir al tab (por si se han añadido datos al dashware y mostrarlos)
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      if (event.urlAfterRedirects === '/tabs/tab1') {
+        this.loadFormData();
+        console.log("Recargando datos de sueño...");
+      }
+    });
 
     this.calcularHorasSuenoAyer("xk0vkwrik");    // pendingggggggggggggggggggggggggggggggggggggggggg
   }

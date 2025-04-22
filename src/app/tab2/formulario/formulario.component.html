@@ -3,7 +3,16 @@
   <p *ngIf="formType === 'formularioNoche'">¿Cómo te has sentido hoy?</p>
 
   <div *ngIf="formType === 'formularioMañana'">
-
+    <div *ngIf="showInfoMessage" class="info-box">
+      <ion-icon name="information-circle-outline" class="info-icon"></ion-icon>
+      <div class="info-text">
+        <strong>Nota:</strong> Puedes consultar la siguiente información solicitada directamente en los <em>ajustes de uso del dispositivo móvil</em>.
+      </div>
+      <button class="close-btn" (click)="showInfoMessage = false">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+    
     <ion-item button (click)="openTimePicker('sleepTime')" [ngClass]="{'error-border': formSubmitted && !sleepTime}">
       <ion-label>Hora y día a la que te has acostado:</ion-label>
       <ion-text>{{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
@@ -87,8 +96,7 @@
   <div *ngIf="formType === 'formularioNoche'">
     <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
       <ion-label>Nivel medio de ansiedad</ion-label>
-      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1"
-        snaps="true"></ion-range>
+      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
       <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
     </ion-item>
 
