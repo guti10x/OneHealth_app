@@ -113,8 +113,8 @@ export class FormularioComponent implements OnInit {
     console.log('Tipo de formulario:', this.formType);
   }
 
-  async openNumberPicker(type: string) {
-    const options = Array.from({ length: 21 }, (_, i) => ({
+  async openNumberPicker(type: string, tamaño: number) {
+    const options = Array.from({ length: tamaño }, (_, i) => ({
       text: i.toString(),
       value: i,
     }));
@@ -143,7 +143,6 @@ export class FormularioComponent implements OnInit {
     await picker.present();
   }
   
-
   // Función para abrir el selector de fecha y hora
   async openTimePicker(field: string) {
     const now = new Date();
@@ -241,6 +240,12 @@ export class FormularioComponent implements OnInit {
       const currentHour = now.getHours();
 
       let recordedAt: Date;
+
+      if (this.sleepTime && this.wakeUpTime && new Date(this.sleepTime) >= new Date(this.wakeUpTime)) {
+        console.log('La hora de acostarse debe ser anterior a la de despertarse');
+        this.formError = '❌ Error al enviar el formulario. La hora de acostarse debe ser anterior a la de despertarse.';
+        return;
+      }
 
       if (this.formMode === 'PendingForm') {
         if (currentHour >= 6 && currentHour < 18) {

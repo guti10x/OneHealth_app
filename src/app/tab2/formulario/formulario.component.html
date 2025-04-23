@@ -13,7 +13,7 @@
       </button>
     </div>
     
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !wakeUpTime }" (click)="openTimePicker('sleepTime')" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !sleepTime }" (click)="openTimePicker('sleepTime')" >
       <ion-label class="label">Hora y día a la que te has acostado:</ion-label>
       <ion-text class="picker-text">
         {{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}
@@ -28,7 +28,7 @@
     </div>
 
     <div [ngClass]="{'error-border': formSubmitted && restLevel === null}" class="range-container">
-      <ion-label class="label">Grado medio de descanso</ion-label>
+      <ion-label class="label">Grado medio de descanso:</ion-label>
       <div class="range-row">
         <ion-range
           [(ngModel)]="restLevel"
@@ -43,10 +43,10 @@
       </div>
     </div>
 
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('screenTime')" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && screenTime === null }" (click)="openNumberPicker('screenTime', 200)" >
       <ion-label class="label">Número de horas de uso de pantalla ayer:</ion-label>     
       <ion-text class="value-display">
-        {{ screenTime !== null ? screenTime : 'Seleccionar' }}
+      {{ screenTime !== null ? screenTime : 'Seleccionar' }}
       </ion-text>
     </div>
 
@@ -64,10 +64,10 @@
       </div>
     </ion-item>
   -->
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('unlocks')" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && unlocks === null }" (click)="openNumberPicker('unlocks', 24)" >
       <ion-label class="label">Número de desbloqueos de tu teléfono ayer:</ion-label>     
       <ion-text class="value-display">
-        {{ unlocks !== null ? unlocks : 'Seleccionar' }}
+      {{ unlocks !== null ? unlocks : 'Seleccionar' }}
       </ion-text>
     </div>
 
@@ -86,7 +86,7 @@
     </ion-item>
 -->
 
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('instagramTime')" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && instagramTime === null }" (click)="openNumberPicker('instagramTime',24)" >
       <ion-label class="label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>     
       <ion-text class="value-display">
         {{ instagramTime !== null ? instagramTime : 'Seleccionar' }}
@@ -108,7 +108,7 @@
     </ion-item>
 -->
 
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('tiktokTime')" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && tiktokTime === null }" (click)="openNumberPicker('tiktokTime',24)" >
       <ion-label class="label">Tiempo que utilizaste la aplicación de Tiktok ayer:</ion-label>     
       <ion-text class="value-display">
         {{ tiktokTime !== null ? tiktokTime : 'Seleccionar' }}
@@ -132,7 +132,7 @@
 -->
     <div class="app-usage-ranking">
       <h3 class="ranking-title">Top aplicaciones mas usadas</h3>
-      <p> Ordena las siguientes apps en función del uso que has hecho de cada una (de mayor a menor uso)</p>
+      <p> Ordena las siguientes apps de mayor a menor uso en función del uso que has hecho de cada una.</p>
       <div cdkDropList [cdkDropListData]="topApps" class="ranking-list" (cdkDropListDropped)="drop($event)">
         <div class="ranking-item" *ngFor="let app of topApps; let i = index" cdkDrag>
           <span class="ranking-number">{{ i + 1 }}.</span>
