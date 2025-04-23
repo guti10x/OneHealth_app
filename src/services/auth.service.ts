@@ -45,11 +45,30 @@ export class AuthService {
   }
 }
 
+ // Método para verificar si un dispositivo ya existe en Firestore
+ async checkIfDeviceExists(): Promise<string> {
+  try {
+    await this.getInfo();
+
+    const q = query(collection(this.firestore, 'users'), where('device', '==', this.deviceid));
+    const querySnapshot = await getDocs(q);
+    if(!querySnapshot.empty){
+      const data = querySnapshot.docs[0].data();
+      //console.log(data['id']);
+    return data['id'];
+    }
+    return "0"
+  } catch (error) {
+    console.error('Error al verificar el ID en Firestore:', error);
+    return "-1";
+  }
+}
+
 async getInfo() {
   try {
     const deviceInfo = await this.deviceService.getDeviceInfo();
-    console.log("EL ID del dispositivo es: ", deviceInfo);
-    this.deviceid = deviceInfo; // Asigna el objeto entero
+    //console.log("EL ID del dispositivo es: ", deviceInfo.identifier);
+    this.deviceid = deviceInfo.identifier; 
   } catch (error) {
     console.error('Error al obtener el Device ID:', error);
   }

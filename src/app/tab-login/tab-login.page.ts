@@ -10,7 +10,6 @@ import { AuthService } from 'src/services/auth.service';
 })
 
 export class TabLoginPage {
-
   constructor(private router: Router, private authService: AuthService) { }
 
   userId: string = '';
@@ -47,4 +46,17 @@ export class TabLoginPage {
     window.location.href = 'https://onehealth-dowload.vercel.app';
   }
 
+  checkDeviceID() {
+    this.authService.checkIfDeviceExists().then((userId: string) => {
+      if (userId=="0" || userId=="-1") {
+        console.log('El dispositivo no esta registrado en la base de datos');
+        this.loginError = true;
+        this.emptyInputError = false;
+      } else {
+        console.log('El dispositivo corresponde al usuario: '+userId);
+        this.userId = userId;
+        this.login();
+      }
+    });
+    }
 }

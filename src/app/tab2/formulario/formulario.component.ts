@@ -23,7 +23,8 @@ export class FormularioComponent implements OnInit {
   city: string | undefined;
   state: string | undefined;
   country: string | undefined;
-  
+  selectedNumber: number | null = 0;
+
   constructor(private pickerCtrl: PickerController,private firebaseService: FirebaseService,private geolocationService: GeolocationService) {}
 
   // Tipo formulario
@@ -111,6 +112,37 @@ export class FormularioComponent implements OnInit {
 
     console.log('Tipo de formulario:', this.formType);
   }
+
+  async openNumberPicker(type: string) {
+    const options = Array.from({ length: 21 }, (_, i) => ({
+      text: i.toString(),
+      value: i,
+    }));
+  
+    const picker = await this.pickerCtrl.create({
+      columns: [
+        {
+          name: 'number',
+          options,
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Aceptar',
+          handler: (value) => {
+            this.setValueByType(type, value.number.value);
+          },
+        },
+      ],
+    });
+  
+    await picker.present();
+  }
+  
 
   // Función para abrir el selector de fecha y hora
   async openTimePicker(field: string) {
@@ -280,7 +312,27 @@ export class FormularioComponent implements OnInit {
   numberUnlocks: number[] = Array.from({ length: 100 }, (_, i) => i);
 
   selectedHour: number = 0;
+
+  setValueByType(type: string, index: number) {
+    let value = 0;
   
+    if (type === 'screenTime' || type === 'instagramTime' || type === 'tiktokTime') {
+      value = this.numbersHours[index] || 0;
+    } else if (type === 'unlocks') {
+      value = this.numberUnlocks[index] || 0;
+    }
+  
+    (this as any)[type] = value;
+  }
+
+onScroll(event: any, type: string) {
+  const scrollTop = event.target.scrollTop;
+  const itemHeight = 40;
+
+  const selectedIndex = Math.round(scrollTop / itemHeight);
+  this.setValueByType(type, selectedIndex);
+}
+/*
   onScroll(event: any, type: string) {
     const scrollTop = event.target.scrollTop;
     const itemHeight = 40;
@@ -296,7 +348,7 @@ export class FormularioComponent implements OnInit {
   
     (this as any)[type] = value;
   }
-
+*/
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.topApps, event.previousIndex, event.currentIndex);
     console.log('Nuevo orden:', this.topApps);

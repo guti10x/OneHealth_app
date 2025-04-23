@@ -13,22 +13,44 @@
       </button>
     </div>
     
-    <ion-item button (click)="openTimePicker('sleepTime')" [ngClass]="{'error-border': formSubmitted && !sleepTime}">
-      <ion-label>Hora y día a la que te has acostado:</ion-label>
-      <ion-text>{{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
-    </ion-item>
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !wakeUpTime }" (click)="openTimePicker('sleepTime')" >
+      <ion-label class="label">Hora y día a la que te has acostado:</ion-label>
+      <ion-text class="picker-text">
+        {{ sleepTime ? (sleepTime | date: 'short') : 'Seleccionar hora' }}
+      </ion-text>
+    </div>
+  
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !wakeUpTime }" (click)="openTimePicker('wakeUpTime')" >
+      <ion-label class="label">Hora y día a la que te has despertado:</ion-label>
+      <ion-text class="picker-text">
+        {{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}
+      </ion-text>
+    </div>
 
-    <ion-item button (click)="openTimePicker('wakeUpTime')" [ngClass]="{'error-border': formSubmitted && !wakeUpTime}">
-      <ion-label>Hora y día a la que te has despertado:</ion-label>
-      <ion-text>{{ wakeUpTime ? (wakeUpTime | date: 'short') : 'Seleccionar hora' }}</ion-text>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && restLevel === null}" class="range-container">
+      <ion-label class="label">Grado medio de descanso</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="restLevel"
+          name="restLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ restLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && restLevel === null}">
-      <ion-label>Grado de descanso</ion-label>
-      <ion-range [(ngModel)]="restLevel" name="restLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ restLevel }}</p>
-    </ion-item>
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('screenTime')" >
+      <ion-label class="label">Número de horas de uso de pantalla ayer:</ion-label>     
+      <ion-text class="value-display">
+        {{ screenTime !== null ? screenTime : 'Seleccionar' }}
+      </ion-text>
+    </div>
 
+   <!-- 
     <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !screenTime}">
       <ion-label class="wheel-label">Número de horas de uso de pantalla ayer:</ion-label>
       <div class="custom-wheel-container">
@@ -41,7 +63,15 @@
       </div>
       </div>
     </ion-item>
+  -->
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('unlocks')" >
+      <ion-label class="label">Número de desbloqueos de tu teléfono ayer:</ion-label>     
+      <ion-text class="value-display">
+        {{ unlocks !== null ? unlocks : 'Seleccionar' }}
+      </ion-text>
+    </div>
 
+  <!--
     <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !unlocks}">
       <ion-label class="wheel-label">Número de desbloqueos de tu teléfono ayer:</ion-label>
       <div class="custom-wheel-container">
@@ -54,7 +84,16 @@
       </div>
       </div>
     </ion-item>
+-->
 
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('instagramTime')" >
+      <ion-label class="label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>     
+      <ion-text class="value-display">
+        {{ instagramTime !== null ? instagramTime : 'Seleccionar' }}
+      </ion-text>
+    </div>
+
+<!--
     <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !instagramTime}">
       <ion-label class="wheel-label">Tiempo que utilizaste la aplicación de Instagram ayer:</ion-label>
       <div class="custom-wheel-container">
@@ -67,7 +106,17 @@
       </div>
       </div>
     </ion-item>
+-->
 
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && !selectedNumber }" (click)="openNumberPicker('tiktokTime')" >
+      <ion-label class="label">Tiempo que utilizaste la aplicación de Tiktok ayer:</ion-label>     
+      <ion-text class="value-display">
+        {{ tiktokTime !== null ? tiktokTime : 'Seleccionar' }}
+      </ion-text>
+    </div>
+
+
+<!--
     <ion-item lines="none" [ngClass]="{'error-border': formSubmitted && !tiktokTime}">
       <ion-label class="wheel-label">Tiempo utilizaste la aplicación de Tiktok ayer:</ion-label>
       <div class="custom-wheel-container">
@@ -80,7 +129,7 @@
       </div>
       </div>
     </ion-item>
-
+-->
     <div class="app-usage-ranking">
       <h3 class="ranking-title">Top aplicaciones mas usadas</h3>
       <p> Ordena las siguientes apps en función del uso que has hecho de cada una (de mayor a menor uso)</p>
@@ -94,42 +143,102 @@
   </div>
 
   <div *ngIf="formType === 'formularioNoche'">
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Nivel medio de ansiedad</ion-label>
-      <ion-range [(ngModel)]="avgAnxietyLevel" name="avgAnxietyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && avgAnxietyLevel === null}" class="range-container">
+      <ion-label class="label">Nivel medio de ansiedad</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="avgAnxietyLevel"
+          name="avgAnxietyLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ avgAnxietyLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Máximo nivel de ansiedad</ion-label>
-      <ion-range [(ngModel)]="maxAnxietyLevel" name="maxAnxietyLevel" min="1" max="10" step="1"
-        snaps="true"></ion-range>
-      <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}" class="range-container">
+      <ion-label class="label">Máximo nivel de ansiedad</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="maxAnxietyLevel"
+          name="maxAnxietyLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ maxAnxietyLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Grado medio de tristeza</ion-label>
-      <ion-range [(ngModel)]="sadnessLevel" name="sadnessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ sadnessLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && sadnessLevel === null}" class="range-container">
+      <ion-label class="label">Grado medio de tristeza</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="sadnessLevel"
+          name="sadnessLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ sadnessLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Grado medio de alegría</ion-label>
-      <ion-range [(ngModel)]="happinessLevel" name="happinessLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ happinessLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && happinessLevel === null}" class="range-container">
+      <ion-label class="label">Grado medio de alegría</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="happinessLevel"
+          name="happinessLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ happinessLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Grado de desgana</ion-label>
-      <ion-range [(ngModel)]="apathyLevel" name="apathyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ apathyLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && apathyLevel === null}" class="range-container">
+      <ion-label class="label">Grado de desgana</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="apathyLevel"
+          name="apathyLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ apathyLevel || '-' }}</p>
+      </div>
+    </div>
 
-    <ion-item [ngClass]="{'error-border': formSubmitted && maxAnxietyLevel === null}">
-      <ion-label>Nivel medio de energía</ion-label>
-      <ion-range [(ngModel)]="avgEnergyLevel" name="avgEnergyLevel" min="1" max="10" step="1" snaps="true"></ion-range>
-      <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
-    </ion-item>
+    <div [ngClass]="{'error-border': formSubmitted && avgEnergyLevel === null}" class="range-container">
+      <ion-label class="label">Nivel medio de energía</ion-label>
+      <div class="range-row">
+        <ion-range
+          [(ngModel)]="avgEnergyLevel"
+          name="avgEnergyLevel"
+          min="1"
+          max="10"
+          step="1"
+          snaps="true"
+          class="range-slider">
+        </ion-range>
+        <p class="value-display">{{ avgEnergyLevel || '-' }}</p>
+      </div>
+    </div>
+
   </div>
 
   <!-- Error -->

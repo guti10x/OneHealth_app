@@ -11,7 +11,7 @@ export class DeviceService {
   // Método para obtener la informacion de un dispositivo
   async getDeviceInfo(): Promise<any> {
     const info = await Device.getId();
-    console.log(info);
+    //console.log(info);
     return info;
   }
 
