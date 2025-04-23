@@ -22,7 +22,9 @@
       <p>Tienes un formulario pendiente por completar</p>
       <span *ngIf="mostrarPendingForm" (click)="showPendingForm()" id="close_form">X</span>
     </div>
-    <button class="btn-completar" (click)="showPendingForm()" *ngIf="!mostrarPendingForm">✍️ Completar ahora</button>
+    <div class="btn_flex">
+      <button class="btn-completar" (click)="showPendingForm()" *ngIf="!mostrarPendingForm">✍️ Completar ahora</button>
+    </div>
     <app-formulario [formMode]="'PendingForm'" *ngIf="mostrarPendingForm"></app-formulario>
   </div>
  

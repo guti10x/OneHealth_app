@@ -21,13 +21,13 @@
 }
 
 .spacer_header {
-  height: 8vh;
+  height: 1vh;
 }
 
 .form-container3 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center !important;
   gap: 8px;
   background: linear-gradient(135deg, #fff, #f8f8f8);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
@@ -39,7 +39,7 @@
   text-align: center;
   font-weight: bold;
   color: #333;
-  border-left: 4px solid #f77300;
+  border-left: 4px solid #007bff;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -53,13 +53,20 @@
   font-size: 0.95rem;
   color: #222;
   margin: 0;
-  font-size: 1.04rem;
+  font-size: 1.02rem;
   word-wrap: break-word;
+}
+
+.btn_flex{
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 10px;
 }
 
 .form-container3 ion-icon {
   font-size: 1.7rem;
-  color: #f7c600;
+  color: #ffcc00;
 }
 
 .form-pending-row {
@@ -83,7 +90,9 @@
 }
 
 .btn-completar {
-  background: #2dae05;
+  background: #007bff;
+  width: 70%;
+  justify-self: center;
   color: #fff;
   border: none;
   padding: 8px 14px;
@@ -101,10 +110,11 @@
 .btn-completar i {
   font-size: 1rem;
   margin-right: 20px;
+  background-color:#0054e9;
 }
 
 .btn-completar:hover {
-  background: #cc0000;
+  background: #0054e9;
   transform: scale(1.05);
 }
 

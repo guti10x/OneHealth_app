@@ -100,7 +100,7 @@ export class FirebaseService {
   
     return getDocs(q).then(snapshot => {
       if (snapshot.empty) {
-        console.log("No se encontraron formulariosvv.");
+        console.log("No se encontraron formularios.");
         return null;
       }
   

@@ -159,7 +159,7 @@ export class DreamSummaryComponent  implements OnInit {
     } else if (quality >= 0) {
       return 'bad-sleep';
     } else {
-      return 'medium-sleep'; // Por defecto
+      return 'unknown-sleep'; // Por defecto
     }
   }
   

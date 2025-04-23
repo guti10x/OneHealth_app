@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { Router, NavigationEnd } from '@angular/router'
+import { filter } from 'rxjs/operators';
 import { FirebaseService } from 'src/services/firebase.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { FirebaseService } from 'src/services/firebase.service';
 })
 export class Tab1Page {
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private router: Router) { }
 
   dataAvailable: boolean = false;
 
@@ -24,6 +26,20 @@ export class Tab1Page {
   carrusel_components_visibles: boolean = false;
 
   ngOnInit() {
+    // Verificar si hay datos a mostrar en el dashwere o mostrar mensaje de no hay datos
+    this.isDataAvailable();
+
+    // Recargar visibilidad de dashwere al ir al tab (por si se ha completado algún formulario y mostrarlos o no)
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      if (event.urlAfterRedirects === '/tabs/tab1') {
+        // Verificar si hay datos a mostrar en el dashwere o mostrar mensaje de no hay datos
+        this.isDataAvailable();
+      }
+    });
+  }
+
+  // Verificar si hay datos a mostrar en el dashwere o mostrar mensaje de no hay datos
+  isDataAvailable() {
     this.firebaseService.obtenerFormularioMasReciente(localStorage.getItem('userId') || '').then((data) => {
       if (data) {
         this.dataAvailable = true;
