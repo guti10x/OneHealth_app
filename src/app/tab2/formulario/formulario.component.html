@@ -64,7 +64,7 @@
       </div>
     </ion-item>
   -->
-    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && unlocks === null }" (click)="openNumberPicker('unlocks', 24)" >
+    <div class="range-container" [ngClass]="{ 'error-border': formSubmitted && unlocks === null }" (click)="openNumberPicker('unlocks', 900)" >
       <ion-label class="label">Número de desbloqueos de tu teléfono ayer:</ion-label>     
       <ion-text class="value-display">
       {{ unlocks !== null ? unlocks : 'Seleccionar' }}
