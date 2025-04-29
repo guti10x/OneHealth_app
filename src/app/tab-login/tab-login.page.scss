@@ -38,13 +38,16 @@
     box-shadow: none;
     margin-bottom: 10px;
 }
-
+ion-item.custom-input {
+    --background: var(--custom-input-background);
+  }
 .custom-input ion-input {
     text-align: center;
     padding: 10px;
     font-size: 14px;
     border: none;
     box-shadow: none;
+    background-color: #dbdbdb;
 }
 
 ion-button {

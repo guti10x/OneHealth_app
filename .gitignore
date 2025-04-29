@@ -75,3 +75,5 @@ android
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+resources/android/**/*

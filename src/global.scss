@@ -48,8 +48,5 @@ body.dark {
   // Color de los íconos y textos de los botones de las pestañas (oscuro)
   --ion-tab-button-color: #000000;
 
-  .custom-inputb {
-    background-color: #c2c2c2;
-    color: rgb(15, 15, 15);
-  }
+  --custom-input-background: #c5c5c5; 
 }
