@@ -59,10 +59,29 @@ firebase projects:list
 
 ### 3. Inicializar Firebase en el proyecto
 
+Para inicializar Firebase en el proyecto, ejecuta el siguiente comando:
+
 ```bash
 firebase init
 ```
 
+Durante la inicialización, sigue estos pasos:
+
+1. **Confirmar que deseas continuar** : responde `Yes` cuando se te pregunte:  
+    `? Are you ready to proceed? Yes`
+
+2. **Seleccionar las características a configurar** : usa la tecla `Espacio` para marcar lasiguiente opciones y `Enter` para confirmar:  
+    `(*) Firestore: Configure security rules and indexes files for Firestore`
+
+3. **Asociar el directorio actual con un proyecto existente** : selecciona el proyecto correspondiente al proyecto:  
+    `i  Using project onehealth-f4967 (onehealth)`
+
+4. **Definir los archivos de configuración** : proporciona los nombres de los archivos para las reglas de seguridad y los índices de Firestore:  
+    - Para las reglas de seguridad:  
+      `? What file should be used for Firestore Rules? firestore.rules`
+    - Para los índices de Firestore:  
+      `? What file should be used for Firestore indexes? firestore.indexes.json`
+      
 ### 4. Añadir Firebase al proyecto Angular/Ionic
 
 ```bash
