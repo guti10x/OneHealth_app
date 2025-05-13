@@ -9,6 +9,7 @@
 
   <!-- Contenido -->
   <ion-card-content class="graph-content">
+    <p class="graph-description">Aquí se mostrarán el conjunto de predicciones realizadas.</p>
     <div *ngIf="data && data.length > 0; else noData">
       <canvas #chartCanvas class="graph-canvas"></canvas>
     </div>

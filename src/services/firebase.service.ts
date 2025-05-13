@@ -190,4 +190,33 @@ export class FirebaseService {
     return data;
   }
 
+  async obtenerTodasLasPredicciones(id: string): Promise<any[]> {
+    console.log("Service: Fetching all predictions for user ID:", id);
+    const collectionRef = collection(this.firestore, 'model_predictions');
+    const q = query(
+      collectionRef,
+      where('id_user', '==', id)
+    );
+
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      console.log("No predictions found.");
+      return [];
+    }
+
+    const predictions = snapshot.docs.map(doc => {
+      const data = doc.data();
+
+      if (data['recorded_at'] && data['recorded_at'].toDate) {
+        data['recorded_at'] = data['recorded_at'].toDate();
+      }
+
+      return data;
+    });
+
+    console.log(`Found ${predictions.length} prediction(s).`);
+    return predictions;
+  }
+
+
 }

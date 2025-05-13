@@ -22,8 +22,6 @@ export class Tab1Page {
   graficaActual = 0;
   touchStartX = 0;
   touchEndX = 0;
-  // Variable para mostrar componentes carrusel de gráficas
-  carrusel_components_visibles: boolean = false;
 
   ngOnInit() {
     // Verificar si hay datos a mostrar en el dashwere o mostrar mensaje de no hay datos

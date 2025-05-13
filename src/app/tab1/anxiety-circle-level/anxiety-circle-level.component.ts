@@ -17,20 +17,21 @@ export class AnxietyCircleLevelComponent  implements OnInit {
 
   // Predicción de ansiedad
   anxietyPrediction: number | null = null;
-  energyLevel: number = 7;
-  desganaLevel: number = 3;
-  alegriaLevel: number = 6;
-  tristezaLevel: number = 4;
+  energyLevel: number | null = null;
+  desganaLevel: number | null = null;
+  alegriaLevel: number | null = null;
+  tristezaLevel: number | null = null;
 
   
   // Variable para mostrar componente (si hay o no hay datos)
-  dataAvailable: boolean = true;
+  dataAvailable: boolean = false;
 
   ngOnInit() {
 
     // Recargar datos del componte al ir al tab (por si se han añadido datos al dashware y mostrarlos)
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/tabs/tab1') {
+        // Obtener predicciones de Firebase
         this.loadPredictData();
         // Recargar datos de emociones
         this.loadEmotionData();
@@ -38,12 +39,10 @@ export class AnxietyCircleLevelComponent  implements OnInit {
       }
     });
 
-    // Obtener prediciiones de Firebase
+    // Obtener predicciones de Firebase
     this.loadPredictData();
     // Recargar datos de emociones
     this.loadEmotionData();
-    
-
   }
 
   loadPredictData() {

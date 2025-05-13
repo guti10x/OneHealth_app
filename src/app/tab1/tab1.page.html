@@ -20,29 +20,11 @@
   <!-- Datos de sueño -->
   <app-dream-summary *ngIf="dataAvailable"></app-dream-summary>
 
-
-
   <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats *ngIf="dataAvailable"></app-mobile-usage-stats>
 
-  <!-- Gráficas de ansiedad y estrés -->
-  <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" *ngIf="carrusel_components_visibles && dataAvailable">
-    <!-- Flecha de retroceso usando Ion Icon -->
-    <ion-icon name="chevron-back-outline" class="carousel-btn left" (click)="prevSlide()"></ion-icon>
-
-    <!-- Contenedor deslizante de las gráficas -->
-    <div class="carousel-content" [style.transform]="'translateX(-' + (graficaActual * 100) + '%)'">
-      <app-time-value-graph [graphTitle]="'Anxiety Statistics'"></app-time-value-graph>
-      <app-time-value-graph [graphTitle]="'Stress Statistics'"></app-time-value-graph>
-    </div>
-
-    <!-- Flecha de avance usando Ion Icon -->
-    <ion-icon name="chevron-forward-outline" class="carousel-btn right" (click)="nextSlide()"></ion-icon>
-  </div>
-  <!-- Indicadores carrusel de gráficas -->
-  <div class="indicators" *ngIf="carrusel_components_visibles && dataAvailable">
-    <span *ngFor="let i of [0, 1]" [class.active]="graficaActual === i"></span>
-  </div>
+  <!-- Gráfica nivel de ansiedad-->
+  <app-time-value-graph *ngIf="dataAvailable" graphTitle="Registro de Ansiedad"></app-time-value-graph>
 
   <!-- Datos Biométricos -->
   <app-biometric-data-sumary *ngIf="dataAvailable"></app-biometric-data-sumary>
