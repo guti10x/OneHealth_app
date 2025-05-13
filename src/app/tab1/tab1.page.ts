@@ -40,12 +40,11 @@ export class Tab1Page {
 
   // Verificar si hay datos a mostrar en el dashwere o mostrar mensaje de no hay datos
   isDataAvailable() {
-    this.firebaseService.obtenerFormularioMasReciente(localStorage.getItem('userId') || '').then((data) => {
-      if (data) {
-        this.dataAvailable = true;
-      } else {
-        this.dataAvailable = false;
-      }
+    Promise.all([
+      this.firebaseService.obtenerFormularioMañanaMasReciente(localStorage.getItem('userId') || ''),
+      this.firebaseService.obtenerFormularioNocheMasReciente(localStorage.getItem('userId') || '')
+    ]).then(([dataMañana, dataNoche]) => {
+      this.dataAvailable = !!(dataMañana || dataNoche);
     });
   }
 

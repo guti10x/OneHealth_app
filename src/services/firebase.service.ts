@@ -89,30 +89,66 @@ export class FirebaseService {
   // ------------ Datos de sueño // Datos de uso del móvil --------------------------------- //
  
   // Obtener el último registro recogido de datos del sueño y uso de aplicaciones por un formulario asociado a un id
-  obtenerFormularioMasReciente(id: string): Promise<any> {
+  obtenerFormularioNocheMasReciente(id: string): Promise<any> {
     const collectionRef = collection(this.firestore, 'formularios');
     const q = query(
       collectionRef,
       where('id_user', '==', id),
-      orderBy('recorded_at', 'desc'),
-      limit(1)
+      orderBy('recorded_at', 'desc')
     );
-  
+
     return getDocs(q).then(snapshot => {
       if (snapshot.empty) {
         console.log("No se encontraron formularios.");
         return null;
       }
-  
-      const doc = snapshot.docs[0];
-      const data = doc.data();
-  
-      // Convertir recorded_at a fecha legible si es un Timestamp
+
+      const docNoche = snapshot.docs.find(doc => doc.data()['apathyLevel'] !== undefined);
+
+      if (!docNoche) {
+        console.log("No se encontró formulario de noche.");
+        return null;
+      }
+
+      const data = docNoche.data();
+
       if (data['recorded_at'] && data['recorded_at'].toDate) {
         data['recorded_at'] = data['recorded_at'].toDate();
       }
-  
-      console.log("Datos del formulario a mostrar:", data);
+
+      console.log("Formulario de noche:", data);
+      return data;
+    });
+  }
+
+  obtenerFormularioMañanaMasReciente(id: string): Promise<any> {
+    const collectionRef = collection(this.firestore, 'formularios');
+    const q = query(
+      collectionRef,
+      where('id_user', '==', id),
+      orderBy('recorded_at', 'desc')
+    );
+
+    return getDocs(q).then(snapshot => {
+      if (snapshot.empty) {
+        console.log("No se encontraron formularios.");
+        return null;
+      }
+
+      const docDia = snapshot.docs.find(doc => doc.data()['apathyLevel'] === undefined);
+
+      if (!docDia) {
+        console.log("No se encontró formulario de día.");
+        return null;
+      }
+
+      const data = docDia.data();
+
+      if (data['recorded_at'] && data['recorded_at'].toDate) {
+        data['recorded_at'] = data['recorded_at'].toDate();
+      }
+
+      console.log("Formulario de día:", data);
       return data;
     });
   }

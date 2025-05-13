@@ -34,10 +34,12 @@
               <circle cx="45" cy="45" r="36" stroke="#95a5a6" stroke-width="8" fill="none" stroke-dasharray="226.19"
                 [attr.stroke-dashoffset]="226.19 - ((desganaLevel ?? 0) / 10) * 226.19" transform="rotate(-90 45 45)"
                 stroke-linecap="round" />
-              <text x="45" y="50" text-anchor="middle" font-size="16" fill="#95a5a6">
-                <ng-container *ngIf="desganaLevel !== null">
-                  {{ desganaLevel <= 3 ? '😊' : desganaLevel <=6 ? '😐' : '😩' }} {{ desganaLevel }} </ng-container>
-              </text>
+                <text x="45" y="50" text-anchor="middle" font-size="16" fill="#95a5a6">
+                <ng-container *ngIf="desganaLevel !== null; else noData">
+                  {{ desganaLevel <= 3 ? '😊' : desganaLevel <=6 ? '😐' : '😩' }} {{ desganaLevel }}
+                </ng-container>
+                <ng-template #noData>-</ng-template>
+                </text>
             </svg>
           </div>
         </div>
@@ -51,9 +53,10 @@
               [attr.stroke-dashoffset]="376.99 - ((anxietyPrediction ?? 0) / 10) * 376.99" transform="rotate(-90 70 70)"
               stroke-linecap="round" />
             <text x="70" y="75" text-anchor="middle" font-size="18" fill="#3498db">
-              <ng-container *ngIf="anxietyPrediction !== null">
-                {{ anxietyPrediction <= 3 ? '😊' : anxietyPrediction <=7 ? '😐' : '😡' }} {{ anxietyPrediction }}
-                  </ng-container>
+              <ng-container *ngIf="anxietyPrediction !== null; else noData">
+              {{ anxietyPrediction <= 3 ? '😊' : anxietyPrediction <=7 ? '😐' : '😡' }} {{ anxietyPrediction }}
+              </ng-container>
+              <ng-template #noData>-</ng-template>
             </text>
           </svg>
         </div>
@@ -68,10 +71,12 @@
               <circle cx="45" cy="45" r="36" stroke="#2ecc71" stroke-width="8" fill="none" stroke-dasharray="226.19"
                 [attr.stroke-dashoffset]="226.19 - ((alegriaLevel ?? 0) / 10) * 226.19" transform="rotate(-90 45 45)"
                 stroke-linecap="round" />
-              <text x="45" y="50" text-anchor="middle" font-size="16" fill="#2ecc71">
-                <ng-container *ngIf="alegriaLevel !== null">
-                  {{ alegriaLevel <= 3 ? '😊' : alegriaLevel <=6 ? '😐' : '😡' }} {{ alegriaLevel }} </ng-container>
-              </text>
+                <text x="45" y="50" text-anchor="middle" font-size="16" fill="#2ecc71">
+                <ng-container *ngIf="alegriaLevel !== null; else noData">
+                  {{ alegriaLevel <= 3 ? '😡' : alegriaLevel <=6 ? '😐' : '😊' }} {{ alegriaLevel }}
+                </ng-container>
+                <ng-template #noData>-</ng-template>
+                </text>
             </svg>
           </div>
 
@@ -83,10 +88,12 @@
               <circle cx="45" cy="45" r="36" stroke="#9b59b6" stroke-width="8" fill="none" stroke-dasharray="226.19"
                 [attr.stroke-dashoffset]="226.19 - ((tristezaLevel ?? 0) / 10) * 226.19" transform="rotate(-90 45 45)"
                 stroke-linecap="round" />
-              <text x="45" y="50" text-anchor="middle" font-size="16" fill="#9b59b6">
-                <ng-container *ngIf="tristezaLevel !== null">
-                  {{ tristezaLevel <= 3 ? '😊' : tristezaLevel <=6 ? '😐' : '😡' }} {{ tristezaLevel }} </ng-container>
-              </text>
+                <text x="45" y="50" text-anchor="middle" font-size="16" fill="#9b59b6">
+                <ng-container *ngIf="tristezaLevel !== null; else noData">
+                  {{ tristezaLevel <= 3 ? '😊' : tristezaLevel <=6 ? '😐' : '😡' }} {{ tristezaLevel }}
+                </ng-container>
+                <ng-template #noData>-</ng-template>
+                </text>
             </svg>
           </div>
         </div>

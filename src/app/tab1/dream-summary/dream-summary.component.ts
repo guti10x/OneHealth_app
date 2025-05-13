@@ -51,7 +51,7 @@ export class DreamSummaryComponent  implements OnInit {
       return;
     }
   
-    this.firebaseService.obtenerFormularioMasReciente(userId).then(data => {
+    this.firebaseService.obtenerFormularioMañanaMasReciente(userId).then(data => {
       console.log("Datos de sueño:", data, userId);
       if (!data) {
         console.error('No sleep data found for user');
@@ -127,7 +127,7 @@ export class DreamSummaryComponent  implements OnInit {
             return;
         }
 
-        this.firebaseService.obtenerFormularioMasReciente(id).then(formularioActual => {
+        this.firebaseService.obtenerFormularioMañanaMasReciente(id).then(formularioActual => {
             if (!formularioActual) {
                 console.log("No hay formulario reciente para calcular el sueño.");
                 return;

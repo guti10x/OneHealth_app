@@ -32,12 +32,16 @@ export class AnxietyCircleLevelComponent  implements OnInit {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/tabs/tab1') {
         this.loadPredictData();
-        console.log("Recargando datos de sueño...");
+        // Recargar datos de emociones
+        this.loadEmotionData();
+        console.log("Recargando datos de estado emocional...");
       }
     });
 
     // Obtener prediciiones de Firebase
     this.loadPredictData();
+    // Recargar datos de emociones
+    this.loadEmotionData();
     
 
   }
@@ -62,6 +66,34 @@ export class AnxietyCircleLevelComponent  implements OnInit {
       }
 
       this.dataAvailable = true;
+    });
+  }
+
+  loadEmotionData() {
+    const userId = localStorage.getItem('userId') || '';
+    console.log("User ID retrieved from localStorage:", userId);
+
+    this.firebaseService.obtenerFormularioNocheMasReciente(userId).then(data => {
+      if (!data) {
+        console.error('No emotion form data found for user');
+        this.dataAvailable = false;
+        return;
+      }
+
+      console.log("Último formulario obtenido:", data);
+
+      this.desganaLevel = data['apathyLevel'] ?? null;
+      this.energyLevel = data['avgEnergyLevel'] ?? null;
+      this.alegriaLevel = data['happinessLevel'] ?? null;
+      this.tristezaLevel = data['sadnessLevel'] ?? null;
+
+      this.dataAvailable = true;
+
+      console.log("Valores extraídos:");
+      console.log("Apatía:", this.desganaLevel);
+      console.log("Energía Promedio:", this.energyLevel);
+      console.log("Felicidad:", this.alegriaLevel);
+      console.log("Tristeza:", this.tristezaLevel);
     });
   }
 

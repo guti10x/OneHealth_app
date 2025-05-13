@@ -72,7 +72,7 @@ export class MobileUsageStatsComponent  implements OnInit {
       return;
     }
   
-    this.firebaseService.obtenerFormularioMasReciente(userId).then(data => {
+    this.firebaseService.obtenerFormularioMañanaMasReciente(userId).then(data => {
       console.log("Datos de sueño:", data, userId);
       if (!data) {
         console.error('No sleep data found for user');
