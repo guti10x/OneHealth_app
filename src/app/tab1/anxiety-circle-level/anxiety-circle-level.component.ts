@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { FirebaseService } from 'src/services/firebase.service';
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators';
@@ -7,6 +9,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-anxiety-circle-level',
   templateUrl: './anxiety-circle-level.component.html',
   styleUrls: ['./anxiety-circle-level.component.scss'],
+  imports: [IonicModule, CommonModule],
 })
 export class AnxietyCircleLevelComponent  implements OnInit {
 
@@ -14,6 +17,11 @@ export class AnxietyCircleLevelComponent  implements OnInit {
 
   // Predicción de ansiedad
   anxietyPrediction: number | null = null;
+  energyLevel: number = 7;
+  desganaLevel: number = 3;
+  alegriaLevel: number = 6;
+  tristezaLevel: number = 4;
+
   
   // Variable para mostrar componente (si hay o no hay datos)
   dataAvailable: boolean = true;

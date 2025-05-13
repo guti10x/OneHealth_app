@@ -165,16 +165,16 @@ export class DreamSummaryComponent  implements OnInit {
   }
   
   // Definir ícono de calidad de sueño
-  getSleepQualityIcon(quality: number): string {
-    if (quality >= 8) {
+  getSleepQualityIcon(sleepQuality: number): string {
+    if (sleepQuality >= 8) {
       return 'happy';
-    } else if (quality >= 5) {
-      return 'neutral';
-    } else if (quality >= 0) {
+    } else if (sleepQuality >= 5) {
+      return 'sad-outline';
+    } else if (sleepQuality >= 0) {
       return 'sad';
     } else {
       return 'help-circle';
     }
-  }  
+  }
 
 }

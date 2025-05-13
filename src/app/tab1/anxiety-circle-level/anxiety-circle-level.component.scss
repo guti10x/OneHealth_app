@@ -1,13 +1,93 @@
-.circulo_div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+ion-card-header {
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 14px;
+    font-weight: bold;
 }
 
-:host {
+/* Título del card */
+ion-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    span{
+        margin-left: 6px;
+    }
+}
+
+ion-card {
+    max-width: 350px;
+    margin: auto;
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    position: relative;
+}
+
+.emocion_container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.emocion_columna {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.emocion_item {
+  width: 80px;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.emocion_item svg {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+}
+
+.emocion_item h4 {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: #2c3e50;
+}
+
+/* Círculo central más grande */
+.emocion_central {
+  flex: 1 1 auto;
+  max-width: 200px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  text-align: center;
+}
+
+.emocion_central h4 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #3498db;
+}
+
+.emocion_central svg {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
 }
