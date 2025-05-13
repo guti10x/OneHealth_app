@@ -11,12 +11,14 @@
     </p>
   </div>
   
-  <!-- Avisos / Recomendacciones -->
-  <!-- Mostrar avisos de datos anormales que se detectan -->  <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
-  <app-carousel-dash *ngIf="dataAvailable"></app-carousel-dash>
+  <!-- Circulo indicador de ansiedad -->
+  <app-anxiety-circle-level *ngIf="dataAvailable"></app-anxiety-circle-level>
 
   <!-- Datos de sueño -->
   <app-dream-summary *ngIf="dataAvailable"></app-dream-summary>
+
+  <!-- Mostrar recomendaciones en base a as predicciones realizadas -->
+  <app-carousel-dash *ngIf="dataAvailable"></app-carousel-dash>
 
   <!-- Datos de uso del móvil -->
   <app-mobile-usage-stats *ngIf="dataAvailable"></app-mobile-usage-stats>

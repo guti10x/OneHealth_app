@@ -16,6 +16,7 @@ import { MobileUsageStatsComponent } from "./mobile-usage-stats/mobile-usage-sta
 import { CarouselDashComponent } from './carousel-dash/carousel-dash.component';
 import { BiometricDataSumaryComponent } from './biometric-data-sumary/biometric-data-sumary.component';
 import { HeaderBuenosDiasNochesComponent } from "../tab2/header-buenos-dias-noches/header-buenos-dias-noches.component";
+import { AnxietyCircleLevelComponent } from "./anxiety-circle-level/anxiety-circle-level.component";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { HeaderBuenosDiasNochesComponent } from "../tab2/header-buenos-dias-noch
     MobileUsageStatsComponent,
     CarouselDashComponent,
     BiometricDataSumaryComponent,
-    HeaderBuenosDiasNochesComponent
+    HeaderBuenosDiasNochesComponent,
+    AnxietyCircleLevelComponent
 ],
   declarations: [
     Tab1Page

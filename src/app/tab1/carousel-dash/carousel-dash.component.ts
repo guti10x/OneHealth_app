@@ -16,10 +16,6 @@ export class CarouselDashComponent  implements OnInit {
   constructor(private firebaseService : FirebaseService, private router: Router) {}
 
   items: { title: string; content: string }[] = [];
-  //items = [
-  //  { title: '📊 Anomalías detectadas', content: 'Se espera un aumento del uso en un 15% esta semana.'},
-  //  { title: '💡 Recomendación del día', content: 'Prueba reducir el tiempo en redes sociales antes de dormir.'}
-  //];
 
   anxietyPrediction: number | null = null;
 

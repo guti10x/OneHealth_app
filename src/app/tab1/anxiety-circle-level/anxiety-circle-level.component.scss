@@ -1,0 +1,13 @@
+.circulo_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
