@@ -36,7 +36,8 @@ export class DreamSummaryComponent  implements OnInit {
       }
     });
 
-    this.calcularHorasSuenoAyer("xk0vkwrik");    // pendingggggggggggggggggggggggggggggggggggggggggg
+    const userId = localStorage.getItem('userId') || '';
+    this.calcularHorasSuenoAyer(userId);
   }
 
   ////////////////////// OBTENER DATOS ////////////////////////////////////////////

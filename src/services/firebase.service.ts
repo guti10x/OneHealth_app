@@ -126,10 +126,32 @@ export class FirebaseService {
   } 
 
   // ------------ Datos de Predicciones / Alertas --------------- //
-  obtenerPredicciones(): Promise<any> {
-    const collectionRef = collection(this.firestore, 'predictions');
-    return getDocs(collectionRef).then(snapshot => {
-      return snapshot.docs.map(doc => doc.data());
-    });
+  async obtenerUltimaPrediccion(id: string): Promise<any> {
+    console.log("Service: Fetching the latest prediction for user ID:", id);
+    const collectionRef = collection(this.firestore, 'model_predictions');
+    const q = query(
+      collectionRef,
+      where('id_user', '==', id),
+      orderBy('recorded_at', 'desc'),
+      limit(1)
+    );
+
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      console.log("No predictions found.");
+      return null;
+    }
+
+    const doc = snapshot.docs[0];
+    const data = doc.data();
+
+    // Convert recorded_at to a readable date if it's a Timestamp
+    if (data['recorded_at'] && data['recorded_at'].toDate) {
+      data['recorded_at'] = data['recorded_at'].toDate();
+    }
+
+    console.log("Latest prediction found:", data);
+    return data;
   }
+
 }
