@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, getDocs, addDoc, query, where, orderBy, limit, Timestamp } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Firestore, collection, getDocs, addDoc, query, where, orderBy, limit, T
 })
 export class FirebaseService {
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private afs: AngularFirestore) {}
 
   init(){}
  
@@ -218,5 +219,22 @@ export class FirebaseService {
     return predictions;
   }
 
+  // ----------------- USUARIOS ----------------------------------------------------------- //
+  // Almacenar id de OenSignal a un usuario 
+  async savePlayerId(uid: string, playerId: string): Promise<void> {
+      try {
+        const userDocRef = this.afs.collection('users').doc(uid);
+        const docSnapshot = await userDocRef.get().toPromise();
+
+        if (docSnapshot?.exists) {
+          await userDocRef.update({ playerId });
+          console.log(`playerId actualizado para UID: ${uid}`);
+        } else {
+          console.warn(`No existe el usuario con UID: ${uid}.`);
+        }
+      } catch (error) {
+        console.error('Error guardando el playerId:', error);
+      }
+    }
 
 }
