@@ -4,11 +4,11 @@
       <img src="../../assets/plataforma_one_health_cover.png" alt="Login Image" class="login-image" />
 
       <ion-card-content>
-        <ion-label class="login-label">Introduce el ID suministrado 9</ion-label>
+        <ion-label class="login-label">Introduce el ID suministrado:</ion-label>
 
-        <ion-item class="custom-input">
-          <ion-input type="text" [(ngModel)]="userId" placeholder="Tu ID"></ion-input>
-        </ion-item>
+        <div class="input-id-container">
+          <input type="text" [(ngModel)]="userId" placeholder="Tu ID" class="native-input" />
+        </div>  
 
         <!-- Mensaje de error si el input está vacío -->
         <p *ngIf="emptyInputError" class="error-message empty-error">⚠️ Introduce un ID válido.</p>

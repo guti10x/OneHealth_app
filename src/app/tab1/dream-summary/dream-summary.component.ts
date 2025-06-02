@@ -153,7 +153,7 @@ export class DreamSummaryComponent  implements OnInit {
   ////////////////////// DEFINIR ESTILOS ////////////////////////////////////////////
   // Definir estilos de calidad de sueño
   getSleepQualityClass(quality: number): string {
-    if (quality >= 8) {
+    if (quality >= 7) {
       return 'good-sleep';
     } else if (quality >= 5) {
       return 'medium-sleep';

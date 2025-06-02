@@ -68,7 +68,7 @@ getAnxietyMessages(prediction: number, count: number = 2): { title: string; cont
   bajo: [
     { title: '🧘 Estado de calma', content: 'Tu nivel de ansiedad es bajo. Sigue con esos buenos hábitos.' },
     { title: '💤 Descanso equilibrado', content: 'Estás durmiendo bien y manteniendo una buena rutina.' },
-    { title: '✅ Bienestar emocional', content: 'Tu estado mental está estable. ¡Sigue así!' }
+    { title: '😌 Bienestar emocional', content: 'Tu estado mental está estable. ¡Sigue así!' }
   ],
   medio: [
     { title: '📈 Ansiedad en aumento', content: 'Tu ansiedad está en un nivel moderado. Conviene estar atento a cómo evoluciona.' },
